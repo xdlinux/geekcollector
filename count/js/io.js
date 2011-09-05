@@ -846,7 +846,7 @@ if (!window.requestAnimationFrame) {
   /**
    * Get the date we're counting down to.
    */
-  var countdownTo = new Date().getTime() + 2000;
+  var countdownTo = new Date().getTime() + 10000;
 
   /**
    * Buckets for the Digits.
