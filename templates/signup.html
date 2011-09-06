@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <title>Xdlinux</title>
 <body id="signup">
-<p>tyler durden isn't real</p>
+	<form action="/signup" method="post" accept-charset="utf-8">
+	<label for="name">name</label>		<input type="text" name="name" value="">
+	<label for="student_num">student_num</label> <input type="text" name="student_num" value="" >
+	<label for="mobile">mobile</label>	 <input type="text" name="mobile" value="" >
+	<label for="email">email</label>		<input type="email" name="email" value="" >
+	<label for="groups">groups</label>		 <select name="groups"  multiple  size="1">
+			<option value="wdt">WDT</option>
+			<option value="android">Android</option>
+			<option value="video">Video</option>
+			<option value="newbie">Newbie</option>			
+		</select>
+<label for="keywords">keywords</label><input type="text" name="keywords" value="" >
+
+		<p><input type="submit" value="Continue &rarr;"></p>
+	</form>
 </body>
