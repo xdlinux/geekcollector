@@ -1,11 +1,14 @@
+#-*- coding: UTF-8 -*-
 from django.conf.urls.defaults import patterns, include, url
 from xdlinux.routes.views import index
 from xdlinux.members.views import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -19,5 +22,6 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 )
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT )
