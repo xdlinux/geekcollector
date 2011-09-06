@@ -17,11 +17,11 @@ class Member(models.Model):
     student_num = models.IntegerField()
     mobile = models.CharField(max_length=20)
     email = models.EmailField(max_length=75, blank=True)
-
+    twitter_id = models.TextField(max_length=30, blank=True)
     #小组选择信息，每人可以选择多个小组，设定related_name为groups就可以通过Group.members直接访问某个小组所有报名的人了
-    groups = models.ManyToManyField(Group, related_name='members')
+    groups = models.ForeignKey(Group, related_name='members')
 
     #个人感兴趣或者了解的科技相关的关键字,每个人都可以选很多个，所以直接以字符串储存，后期在做处理,
-    kw = models.TextField(blank=True)
+    keywords = models.TextField(blank=True)
     def __unicode__(self):
         return self.name
