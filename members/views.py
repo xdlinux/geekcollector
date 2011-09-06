@@ -19,3 +19,7 @@ def signup(request):
 
     记得GET和POST分开处理哦~
     """
+    if request.method == 'GET':
+        return render_to_response('signup.html', locals())
+    elif request.method == 'POST':
+        return render_to_response('signup_callback.html', locals())
