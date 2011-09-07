@@ -611,7 +611,7 @@ if (!window.requestAnimationFrame) {
   function genDot(color, className, ctx) {
     var h = new Image();
     h.className = className;
-    h.src = './img/' + className.replace(/\s.*?$/, '') + '-' + color +
+    h.src = '/static/img/' + className.replace(/\s.*?$/, '') + '-' + color +
         '.png';
     ctx.appendChild(h);
     return h;
@@ -821,13 +821,13 @@ if (!window.requestAnimationFrame) {
   var finale = function() {
     if (isChrome) {
       $('#now').css({'display':'none'});
-      io.injectScripts(['js/Three.js',
-                        'js/Tween.js',
-                        'js/countdown-entities.js'],
+      io.injectScripts(['/static/js/Three.js',
+                        '/static/js/Tween.js',
+                        '/static/js/countdown-entities.js'],
                        function() {
                          io.el('wrapper').style.background =  'none';
                          io.el('canvas-content').innerHTML = '';
-                         io.injectScript('js/countdown-finale.js');
+                         io.injectScript('/static/js/countdown-finale.js');
                        });
     }
   };
