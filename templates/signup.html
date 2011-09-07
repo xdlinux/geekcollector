@@ -1,52 +1,43 @@
-<!DOCTYPE html>
-<head>
-<title>XDL 2011</title>
-</head>
-<body>
-    <form action="" method="post">
-        <div id="base">
-            <table>
-                <tr>
-                    <th>Name 姓名:</th>
-                    <td><input type="text" name="name" /></td>
-                </tr>
-                <tr>
-                    <td id="nameinfo" colspan="2"></td>
-                </tr>
-                <tr>
-                    <th>Student Number:学号</th>
-                    <td><input type="text" name="student_num" /></td>
-                </tr>
-                <tr>
-                	<td id="sninfo" colspan="2"></td>
-                </tr>
-                <tr>
-                    <th>Mobile 手机:</th>
-                    <td><input type="text" name="mobile" value="" ></td>
-                </tr>
-                <tr>
-                	<td id="mobileinfo" colspan="2"></td>
-                </tr>
-                <tr>
-                    <th>E-Mail 电子邮箱:</th>
-                    <td>
-                        <input name="email" type="email" />
-                    </td>
-                </tr>
-                <tr>
-                	<td id="emailinfo" colspan="2"></td>
-                </tr>
-                <tr>
-                    <th>Twitter ID:</th>
-                    <td>
-                        <input name="twitter_id" type="text" />
-                    </td>
-                </tr>
-                <tr>
-                	<td id="twitterinfo" colspan="2"></td>
-                </tr>
-            </table>
-        </div>
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post">
+    <div id="base">
+        <h2>
+            Base Information 
+        </h2>
+        <p>登记你的基本信息</p>
+        <ul>
+            <dt>
+            Name 姓名:
+            </dt>
+            <li>
+            <input type="text" name="name" id="name" />
+            </li>
+            <dt>
+            Student Number 学号:
+            </dt>
+            <li>
+            <input type="text" name="student_num" id="sn"/>
+            </li>
+            <dt>
+            Mobile 手机:
+            </dt>
+            <li>
+            <input type="text" name="mobile" id="mb">
+            </li>
+            <dt>
+            E-Mail 电子邮箱:
+            </dt>
+            <li>
+            <input name="email" type="email" id="email"/>
+            </li>
+            <dt>
+            Twitter ID:
+            </dt>
+            <li>
+            <input name="twitter_id" type="text" id="twitter"/>
+            </li>
+        </ul>
         <div id="groups">
             {% for group in groups %}
             <div>
@@ -54,14 +45,160 @@
                 <dl>
                     <dt>{{ group }}</dt>
                     <dd>
-                        {{ group.describe }}
+                    {{ group.describe }}
                     </dd>
                 </dl>
             </div>
             {% endfor %}
         </div>
         <div id="keywords">
-        
+
         </div>
     </form>
-</body>
+    {% endblock %}
+    {% block style %}
+    <style type="text/css">
+        #wrapper{
+            min-width:360px;
+            overflow:hidden;
+            background-color:rgba(255,255,255,0.5);
+            position:fixed;
+            left:40px;
+            right:40px;
+            top:40px;
+            height:480px;
+            z-index:101;
+            -webkit-border-radius:20px;
+            -moz-border-radius:20px;
+            -ms-border-radius:20px;
+            -o-border-radius:20px;
+            -webkit-box-shadow: 0 0 10px #aaa;
+            -moz-box-shadow: 0 0 10px #aaa;
+            -ms-box-shadow: 0 0 10px #aaa;
+            -o-box-shadow: 0 0 10px #aaa;
+
+        }
+        #base,#groups,#keywords{
+            height:480px;
+            font-size:24px;
+            font-weight:bold;
+            color:#666;
+        }
+        h2{
+            font-size:36px;
+            color:white;
+            background-color:#13acfa;
+            margin:20px 0 0 0;
+            padding:0 10px;
+        }
+        #wrapper p{
+            font-size:18px;
+            padding:0 10px;
+            background-color:#13acfa;
+            color:white;
+        }
+        ul{
+            list-style:none;
+            margin:0;
+            padding:20px;
+        }
+        li{
+            overflow:hidden;
+            height:30px;
+            border:2px solid #ccc;
+            background-color:rgba(255,255,255,0.5);
+            padding:0;
+            margin-bottom:5px;
+            -webkit-transition:border 0.4s ease-out;
+            -moz-transition:border 0.4s ease-out;
+            -o-transition:border 0.4s ease-out;
+        }
+        li.focus{
+            border:solid 2px #13acfa;
+        }
+        li.invalid{
+            border:solid 2px #E44D26;
+        }
+        li.required{
+            border:solid 2px #FDD901;
+        }
+        li.valid{
+            border:solid 2px #3e3;
+        }
+
+        input{
+            display:block;
+            height:28px;
+            border:none;
+            font-size:24px;
+            width:90%;
+        }
+        input:focus
+        {
+            outline:none;
+        }
+        li .vali{
+            color:white;
+            width:0px;
+            height:32px;
+            float:right;
+            font-size:18px;
+            margin-top:-32px;
+            overflow:hidden;
+            white-space:nowrap;
+            -webkit-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+            -moz-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+            -o-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+        }
+        .focus .vali{
+            width:32px;
+            background-color:#13acfa;
+        }
+        .invalid .vali{
+            width:32px;
+            background-color:#E44D26;
+        }
+        .required .vali{
+            width:80px;
+            background-color:#FDD901;
+            padding:6px;
+        }
+        .valid .vali{
+            background-color:#6f9;
+         }
+
+    </style>
+    {% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="/static/js/validate.js"></script>
+<script type="text/javascript">
+    var emptyimg=$('<img/>').attr({'src':'/static/img/empty.png'})
+    var validimg=$('<img/>').attr({'src':'/static/img/valid.png'})
+    var invalidimg=$('<img/>').attr({'src':'/static/img/invalid.png'})
+    function callback(status,type,match){
+        if(status=='normal')
+            $(this).parent().removeClass();
+        if(status=='required')
+            $(this).next('.vali').empty().append('此项必填').parent().removeClass().addClass('required');
+        if(status=='empty')
+            $(this).next('.vali').empty().append(emptyimg).parent().removeClass().addClass('focus');
+        if(status=='invalid')
+            $(this).next('.vali').empty().append(invalidimg).parent().removeClass().addClass('invalid');
+        if(status=='valid')
+            $(this).next('.vali').empty().append(validimg).parent().removeClass().addClass('valid');
+
+    }
+    $(document).ready(
+            function(){
+                $('#base li').append('<div class="vali"></div>')
+                $('#email').add_validate('email',callback).required(true);
+                $('#name').add_validate('name',callback).required(true);
+                $('#mb').add_validate('mobile',callback).required(true);
+                $('#twitter').add_validate('twitter',callback);
+                $('#sn').add_validate('student_number',callback).required(true);
+            }
+            )
+</script>
+{% endblock %}
+
