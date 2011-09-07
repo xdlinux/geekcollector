@@ -2,3 +2,4 @@
 .pyc
 xdl
 *.orig
+.DS_Store
