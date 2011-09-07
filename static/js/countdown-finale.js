@@ -498,16 +498,11 @@ var countdownFinale = (function() {
         .to({x: 0, y: 0, z: 700}, 1000).easing(TWEEN.Easing.Circular.EaseOut).start();
       new TWEEN.Tween(group.position)
         .to({z: 200}, 2000).easing(TWEEN.Easing.Circular.EaseOut).start();
-      var again = $('body').prepend('<div id="countdown-watch-again">' +
-                                    '<img src="chrome-42.png">' +
-                                    '<a href="#">Watch the experiment ' +
-                                    'again</a></div>');
-      $('#countdown-watch-again a').bind('click', function() {
+      setTimeout( function() {
         window.location.hash = '#again';
         window.location.reload(true);
         return false;
-      });
-      $('#countdown-watch-again').fadeIn('fast');
+      },20000);
     }
   }
 
