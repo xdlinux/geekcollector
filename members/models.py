@@ -11,12 +11,12 @@ class Group(models.Model):
 
 
 class Member(models.Model):
-    """成员的DRM"""
+    """成员的CRM"""
     #基本信息
     name = models.CharField(max_length=10)
     student_num = models.CharField(max_length=20, unique=True)
     mobile = models.CharField(max_length=20)
-    email = models.EmailField(max_length=75, blank=True)
+    email = models.EmailField(max_length=75)
     twitter_id = models.CharField(max_length=30, blank=True)
     #小组选择信息，每人可以选择多个小组，设定related_name为groups就可以通过Group.members直接访问某个小组所有报名的人了
     groups = models.ForeignKey(Group, related_name='members')
