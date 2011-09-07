@@ -13,4 +13,3 @@ def index(request,os=""):
 
     template为index.html
     """
-    return render_to_response('index.html', locals())
