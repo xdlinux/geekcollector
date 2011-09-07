@@ -20,10 +20,11 @@ def signup(request):
     记得GET和POST分开处理哦~
     """
     if request.method == 'GET':
-        return render_to_response('signup.html', {})
+        groups=Group.objects.all()
+        return render_to_response('signup.html', {'groups':groups})
     elif request.method == 'POST':
         group_id = int(request.POST['groups'])
         group = Group.objects.get(id = group_id)
         Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'],email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)
         num = len(Member.objects.all())
-        return render_to_response('signup_callback.html', {'num':num})
+        return render_to_response('signup_callback.html', locals()) #用locals()可以直接将当前环境中所有的变量传入
