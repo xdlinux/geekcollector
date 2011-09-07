@@ -146,25 +146,34 @@
             margin-top:-32px;
             overflow:hidden;
             white-space:nowrap;
+            padding:6px 0 6px 32px;
             -webkit-transition:width 0.4s ease-out,background-color 0.2s ease-out;
             -moz-transition:width 0.4s ease-out,background-color 0.2s ease-out;
             -o-transition:width 0.4s ease-out,background-color 0.2s ease-out;
         }
         .focus .vali{
-            width:32px;
+            width:80px;
             background-color:#13acfa;
+            background-image:url(/static/img/empty.png);
+            background-repeat:no-repeat;
         }
         .invalid .vali{
-            width:32px;
+            width:100px;
             background-color:#E44D26;
+            background-image:url(/static/img/invalid.png);
+            background-repeat:no-repeat;
         }
         .required .vali{
             width:80px;
             background-color:#FDD901;
-            padding:6px;
+            background-image:url(/static/img/required.png);
+            background-repeat:no-repeat;
         }
         .valid .vali{
-            background-color:#6f9;
+            width:10px;
+            background-color:#3e3;
+            background-image:url(/static/img/valid.png);
+            background-repeat:no-repeat;
          }
 
     </style>
@@ -173,30 +182,51 @@
 {% block js %}
 <script type="text/javascript" src="/static/js/validate.js"></script>
 <script type="text/javascript">
-    var emptyimg=$('<img/>').attr({'src':'/static/img/empty.png'})
-    var validimg=$('<img/>').attr({'src':'/static/img/valid.png'})
-    var invalidimg=$('<img/>').attr({'src':'/static/img/invalid.png'})
+    function get_school_name(n){
+        var school_name=['通信工程','电子工程','计算机','机电','技物','人文','理','经济管理','','','','','软件','微电子','生物科学'];
+        return school_name[parseInt(n)-1]+'学院';
+    }
     function callback(status,type,match){
-        if(status=='normal')
-            $(this).parent().removeClass();
-        if(status=='required')
-            $(this).next('.vali').empty().append('此项必填').parent().removeClass().addClass('required');
-        if(status=='empty')
-            $(this).next('.vali').empty().append(emptyimg).parent().removeClass().addClass('focus');
-        if(status=='invalid')
-            $(this).next('.vali').empty().append(invalidimg).parent().removeClass().addClass('invalid');
+        var v=$(this).next('.vali');
         if(status=='valid')
-            $(this).next('.vali').empty().append(validimg).parent().removeClass().addClass('valid');
+        {
+            v.empty()
+         if(type=='student_number'){
+             v.text('请确认，你来自'+get_school_name(match[1])+'!');
+
+             setTimeout(function(){v.width(v.text().length*18)},200);
+         }
+         else if(type=='name') 
+         {
+             var w=$(this).val().replace(/[a-zA-Z']/g,'');
+             v.text('欢迎你，'+w+'!');
+             setTimeout(function(){v.width(w.length*30+57)},200);
+         }
+        }
+        if($(this).data('status')==status)return;
+        v.attr({'style':''})
+        if(status=='valid')
+            v.parent().removeClass().addClass('valid');
+        else if(status=='normal')
+            v.parent().removeClass();
+        else if(status=='required')
+            v.empty().text('此项必填').parent().removeClass().addClass('required');
+        else if(status=='empty')
+            v.empty().text('此项选填').parent().removeClass().addClass('focus');
+        else if(status=='invalid')
+            v.empty().text('输入不合法').parent().removeClass().addClass('invalid');
+        $(this).data('status',status);
 
     }
     $(document).ready(
             function(){
-                $('#base li').append('<div class="vali"></div>')
+                $('input').attr({'autocomplete':'off'});
+                $('#base li').append('<div class="vali"></div>');
                 $('#email').add_validate('email',callback).required(true);
                 $('#name').add_validate('name',callback).required(true);
-                $('#mb').add_validate('mobile',callback).required(true);
+                $('#mb').add_validate('mobile',callback).required(true).number_only();
                 $('#twitter').add_validate('twitter',callback);
-                $('#sn').add_validate('student_number',callback).required(true);
+                $('#sn').add_validate('student_number',callback).required(true).number_only();
             }
             )
 </script>
