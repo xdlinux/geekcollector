@@ -14,7 +14,7 @@ class Member(models.Model):
     """成员的DRM"""
     #基本信息
     name = models.CharField(max_length=10)
-    student_num = models.CharField(max_length=15, unique=True)
+    student_num = models.CharField(max_length=20, unique=True)
     mobile = models.CharField(max_length=20)
     email = models.EmailField(max_length=75, blank=True)
     twitter_id = models.CharField(max_length=30, blank=True)
