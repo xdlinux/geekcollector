@@ -26,5 +26,10 @@ def signup(request):
         group_id = int(request.POST['groups'])
         group = Group.objects.get(id = group_id)
         Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'],email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)
+<<<<<<< HEAD
         num = len(Member.objects.all())
         return render_to_response('signup_callback.html', locals()) #用locals()可以直接将当前环境中所有的变量传入
+=======
+        num = Member.objects.count()
+        return render_to_response('signup_callback.html', {'num':num})
+>>>>>>> change the len() fund to .count method
