@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<head>
+<title>XDL 2011</title>
+</head>
+<body>
+    <form action="" method="post">
+        <div id="base">
+            <table>
+                <tr>
+                    <th>Name 姓名:</th>
+                    <td><input type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td id="nameinfo" colspan="2"></td>
+                </tr>
+                <tr>
+                    <th>Student Number:学号</th>
+                    <td><input type="text" name="student_num" /></td>
+                </tr>
+                <tr>
+                	<td id="sninfo" colspan="2"></td>
+                </tr>
+                <tr>
+                    <th>Mobile 手机:</th>
+                    <td><input type="text" name="mobile" value="" ></td>
+                </tr>
+                <tr>
+                	<td id="mobileinfo" colspan="2"></td>
+                </tr>
+                <tr>
+                    <th>E-Mail 电子邮箱:</th>
+                    <td>
+                        <input name="email" type="email" />
+                    </td>
+                </tr>
+                <tr>
+                	<td id="emailinfo" colspan="2"></td>
+                </tr>
+                <tr>
+                    <th>Twitter ID:</th>
+                    <td>
+                        <input name="twitter_id" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                	<td id="twitterinfo" colspan="2"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="groups">
+            {% for group in groups %}
+            <div>
+                <input type="hidden" value="{{ group.id }}">
+                <dl>
+                    <dt>{{ group }}</dt>
+                    <dd>
+                        {{ group.describe }}
+                    </dd>
+                </dl>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="keywords">
+        
+        </div>
+    </form>
+</body>
+=======
+<title>Xdlinux</title>
+<body id="signup">
+	{{ error }}
+	<form action="/signup" method="post">
+	<label for="name">name</label>		<input type="text" name="name" value="">
+	<label for="student_num">student_num</label> <input type="text" name="student_num"  >
+	<label for="mobile">mobile</label>	 <input type="text" name="mobile" value="" >
+	<label for="email">email</label>		<input type="email" name="email" value="" >
+	<label for="groups">groups</label>		 <select name="groups"  multiple  size="1">
+			<option value="1">WDT</option>
+			<option value="2">Android</option>
+			<option value="3">Video</option>
+			<option value="4">Newbie</option>			
+		</select>
+<label for="keywords">keywords</label><input type="text" name="keywords" value="" >
+
+		<p><input type="submit" value="Continue &rarr;"></p>
+	</form>
+</body>
+>>>>>>> d06cade3ed9800e419ae0695a8f34fe0becb9aa8
