@@ -5,7 +5,9 @@ from xdlinux.members.models import Member, Group #引入报名成员的CRM，mem
 
 def count(request):
     """返回当前已经报名的总人数，直接返回数字就好了，不需要特殊格式"""
-
+    num = Member.objects.count()
+    return render_to_response('count/count.html', {'num':num })
+    
 def signup(request):
     """
     渲染报名表的view，并处理报名表单的提交
@@ -26,6 +28,6 @@ def signup(request):
         group_id = int(request.POST['groups'])
         group = Group.objects.get(id = group_id)
         Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'],email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)
-        num = len(Member.objects.all())
+        num = Member.objects.count()
         return render_to_response('signup_callback.html', locals()) #用locals()可以直接将当前环境中所有的变量传入
 
