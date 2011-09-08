@@ -5,6 +5,7 @@ class Group(models.Model):
     """小组，包括WDT，android，Video，Newbie"""
     name = models.CharField(max_length=30)    
     describe = models.TextField(max_length=140, blank=True) #小组简介限制字数一百四，大家都懂的，回来让各个小组的负责人写，WDT的畜松你自己搞定吧~
+    image = models.CharField(max_length=40)
     def __unicode__(self):
         return self.name
 
