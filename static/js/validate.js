@@ -4,7 +4,7 @@ $.fn.extend({
             if($(this).required()) return false;
             else return true;
         }
-        return $(this).val().match($(this).data('re'));
+        return $(this).val().match((re||$(this).data('re')));
     },
     'add_validate':function(type,callback)
    {
@@ -16,7 +16,7 @@ $.fn.extend({
             'email':/([\w\d_\.]+)@(([\w\d]+\.)+\w{1,5})/,
             'mobile':/(\d{11})/,
             'twitter':/@[\w\d_]+/,
-            'student_number' : /(0\d|10|12|13|14)(08|09|10|11)([1-9]\d)(\d\d)/,
+            'student_number' : /(0[1-8]|13|14|15)(08|09|10|11)([1-9]\d)(\d\d)/,
         }
         if(!(re=regexp[type]))
         {
@@ -56,6 +56,7 @@ $.fn.extend({
                 {
                     if(!((e.keyCode>=48 && e.keyCode<=58 )|| (e.keyCode>=35 && e.keyCode<=37)|| e.keyCode==39 ||e.keyCode==8 ||e.keyCode==9))return false;
                     return true;
-                }).bind('afterpaste',function(){$(this).val($(this).val().replace(/\D/g,''))});
+                }).bind('afterpaste',function(){$(this).val($(this).val().replace(/\D/g,''))})
+        .bind('change',function(){$(this).val($(this).val().replace(/\D/g,''))});
     }
 })
