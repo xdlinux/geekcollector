@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 <form action="" method="post">
+    <div id="welcome">
+        <h2>Welcome</h2>
+        <p>加入开源社区，共享开源乐趣</p>
+        <dl>
+            <dt>西电开源社区欢迎你</dt>
+            <dd>
+            欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。您只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
+            </dd>
+            <dd>
+            还等什么？立即点击“下一步”报名吧！ </dd>
+
+        </dl>
+    </div>
     <div id="base">
         <h2>
             Base Information 
@@ -38,146 +51,167 @@
             <input name="twitter_id" type="text" id="twitter"/>
             </li>
         </ul>
-        <div id="groups">
-            {% for group in groups %}
-            <div>
-                <input type="hidden" value="{{ group.id }}">
-                <dl>
-                    <dt>{{ group }}</dt>
-                    <dd>
-                    {{ group.describe }}
-                    </dd>
-                </dl>
+    </div>
+    <div id="groups">
+        {% for group in groups %}
+        <div>
+            <input type="hidden" value="{{ group.id }}">
+            <dl>
+                <dt>{{ group }}</dt>
+                <dd>
+                {{ group.describe }}
+                </dd>
+            </dl>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="keywords">
+
+    </div>
+        <div class="button">
+            <div class="back">
+                <img src="/static/img/back.png" alt="NEXT" />
             </div>
-            {% endfor %}
-        </div>
-        <div id="keywords">
+            <div class="reset">
+                <img src="/static/img/reset.png" alt="NEXT" />
+            </div>
+            <div class="next">
+                <img src="/static/img/next.png" alt="NEXT" />
+            </div>
 
         </div>
-    </form>
-    {% endblock %}
-    {% block style %}
-    <style type="text/css">
-        #wrapper{
-            min-width:360px;
-            overflow:hidden;
-            background-color:rgba(255,255,255,0.5);
-            position:fixed;
-            left:40px;
-            right:40px;
-            top:40px;
-            height:480px;
-            z-index:101;
-            -webkit-border-radius:20px;
-            -moz-border-radius:20px;
-            -ms-border-radius:20px;
-            -o-border-radius:20px;
-            -webkit-box-shadow: 0 0 10px #aaa;
-            -moz-box-shadow: 0 0 10px #aaa;
-            -ms-box-shadow: 0 0 10px #aaa;
-            -o-box-shadow: 0 0 10px #aaa;
+</form>
+{% endblock %}
+{% block style %}
+<style type="text/css">
+    #wrapper{
+        min-width:360px;
+        overflow:hidden;
+        background-color:rgba(255,255,255,0.5);
+        position:fixed;
+        left:40px;
+        right:40px;
+        top:40px;
+        height:480px;
+        z-index:101;
+        -webkit-border-radius:20px;
+        -moz-border-radius:20px;
+        -ms-border-radius:20px;
+        -o-border-radius:20px;
+        -webkit-box-shadow: 0 0 10px #aaa;
+        -moz-box-shadow: 0 0 10px #aaa;
+        -ms-box-shadow: 0 0 10px #aaa;
+        -o-box-shadow: 0 0 10px #aaa;
 
-        }
-        #base,#groups,#keywords{
-            height:480px;
-            font-size:24px;
-            font-weight:bold;
-            color:#666;
-        }
-        h2{
-            font-size:36px;
-            color:white;
-            background-color:#13acfa;
-            margin:20px 0 0 0;
-            padding:0 10px;
-        }
-        #wrapper p{
-            font-size:18px;
-            padding:0 10px;
-            background-color:#13acfa;
-            color:white;
-        }
-        ul{
-            list-style:none;
-            margin:0;
-            padding:20px;
-        }
-        li{
-            overflow:hidden;
-            height:30px;
-            border:2px solid #ccc;
-            background-color:rgba(255,255,255,0.5);
-            padding:0;
-            margin-bottom:5px;
-            -webkit-transition:border 0.4s ease-out;
-            -moz-transition:border 0.4s ease-out;
-            -o-transition:border 0.4s ease-out;
-        }
-        li.focus{
-            border:solid 2px #13acfa;
-        }
-        li.invalid{
-            border:solid 2px #E44D26;
-        }
-        li.required{
-            border:solid 2px #FDD901;
-        }
-        li.valid{
-            border:solid 2px #3e3;
-        }
+    }
+    #welcome,#base,#groups,#keywords{
+        height:480px;
+        font-size:24px;
+        font-weight:bold;
+        color:#666;
+    }
+    #welcome dl{padding:0 70px 0 400px;font-size:18px;
+        height:480px;
+        background:url(/static/img/opensource.png) no-repeat;
+    }
 
-        input{
-            display:block;
-            height:28px;
-            border:none;
-            font-size:24px;
-            width:90%;
-        }
-        input:focus
-        {
-            outline:none;
-        }
-        li .vali{
-            color:white;
-            width:0px;
-            height:32px;
-            float:right;
-            font-size:18px;
-            margin-top:-32px;
-            overflow:hidden;
-            white-space:nowrap;
-            padding:6px 0 6px 32px;
-            -webkit-transition:width 0.4s ease-out,background-color 0.2s ease-out;
-            -moz-transition:width 0.4s ease-out,background-color 0.2s ease-out;
-            -o-transition:width 0.4s ease-out,background-color 0.2s ease-out;
-        }
-        .focus .vali{
-            width:80px;
-            background-color:#13acfa;
-            background-image:url(/static/img/empty.png);
-            background-repeat:no-repeat;
-        }
-        .invalid .vali{
-            width:100px;
-            background-color:#E44D26;
-            background-image:url(/static/img/invalid.png);
-            background-repeat:no-repeat;
-        }
-        .required .vali{
-            width:80px;
-            background-color:#FDD901;
-            background-image:url(/static/img/required.png);
-            background-repeat:no-repeat;
-        }
-        .valid .vali{
-            width:10px;
-            background-color:#3e3;
-            background-image:url(/static/img/valid.png);
-            background-repeat:no-repeat;
-         }
+    #welcome dd{margin:10px 0;}
+    #welcome dt{font-size:32px;font-weight:bold;margin:20px 0;color:#13acfa}
+    .button{position:absolute;bottom:20px;right:0;}
+    h2{
+        font-size:36px;
+        color:white;
+        background-color:#13acfa;
+        margin:20px 0 0 0;
+        padding:0 10px;
+    }
+    #wrapper p{
+        font-size:18px;
+        padding:0 10px;
+        background-color:#13acfa;
+        color:white;
+    }
+    ul{
+        list-style:none;
+        margin:0;
+        padding:20px;
+    }
+    li{
+        overflow:hidden;
+        height:30px;
+        border:2px solid #ccc;
+        background-color:rgba(255,255,255,0.5);
+        padding:0;
+        margin-bottom:5px;
+        -webkit-transition:border 0.4s ease-out;
+        -moz-transition:border 0.4s ease-out;
+        -o-transition:border 0.4s ease-out;
+    }
+    li.focus{
+        border:solid 2px #13acfa;
+    }
+    li.invalid{
+        border:solid 2px #E44D26;
+    }
+    li.required{
+        border:solid 2px #FDD901;
+    }
+    li.valid{
+        border:solid 2px #3e3;
+    }
 
-    </style>
-    {% endblock %}
+    input{
+        display:block;
+        height:28px;
+        border:none;
+        font-size:24px;
+        width:90%;
+    }
+    input:focus
+    {
+        outline:none;
+    }
+    li .vali{
+        color:white;
+        width:0px;
+        height:32px;
+        float:right;
+        font-size:18px;
+        margin-top:-32px;
+        overflow:hidden;
+        white-space:nowrap;
+        padding:6px 0 6px 32px;
+        -webkit-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+        -moz-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+        -o-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+    }
+    .focus .vali{
+        width:80px;
+        background-color:#13acfa;
+        background-image:url(/static/img/empty.png);
+        background-repeat:no-repeat;
+    }
+    .invalid .vali{
+        width:100px;
+        background-color:#E44D26;
+        background-image:url(/static/img/invalid.png);
+        background-repeat:no-repeat;
+    }
+    .required .vali{
+        width:80px;
+        background-color:#FDD901;
+        background-image:url(/static/img/required.png);
+        background-repeat:no-repeat;
+    }
+    .valid .vali{
+        width:10px;
+        background-color:#3e3;
+        background-image:url(/static/img/valid.png);
+        background-repeat:no-repeat;
+    }
+
+</style>
+{% endblock %}
 
 {% block js %}
 <script type="text/javascript" src="/static/js/validate.js"></script>
@@ -186,25 +220,25 @@
         var school_name=['通信工程','电子工程','计算机','机电','技物','人文','理','经济管理','','','','','软件','微电子','生物科学'];
         return school_name[parseInt(n)-1]+'学院';
     }
-    function callback(status,type,match){
-        var v=$(this).next('.vali');
-        if(status=='valid')
-        {
-            v.empty()
-         if(type=='student_number'){
-             v.text('请确认，你来自'+get_school_name(match[1])+'!');
+function callback(status,type,match){
+    var v=$(this).next('.vali');
+    if(status=='valid')
+    {
+        v.empty()
+            if(type=='student_number'){
+                v.text('请确认，你来自'+get_school_name(match[1])+'!');
 
-             setTimeout(function(){v.width(v.text().length*18)},200);
-         }
-         else if(type=='name') 
-         {
-             var w=$(this).val().replace(/[a-zA-Z']/g,'');
-             v.text('欢迎你，'+w+'!');
-             setTimeout(function(){v.width(w.length*30+57)},200);
-         }
-        }
-        if($(this).data('status')==status)return;
-        v.attr({'style':''})
+                setTimeout(function(){v.width(v.text().length*18)},200);
+            }
+            else if(type=='name') 
+            {
+                var w=$(this).val().replace(/[a-zA-Z']/g,'');
+                v.text('欢迎你，'+w+'!');
+                setTimeout(function(){v.width(w.length*30+57)},200);
+            }
+    }
+    if($(this).data('status')==status)return;
+    v.attr({'style':''})
         if(status=='valid')
             v.parent().removeClass().addClass('valid');
         else if(status=='normal')
@@ -215,20 +249,20 @@
             v.empty().text('此项选填').parent().removeClass().addClass('focus');
         else if(status=='invalid')
             v.empty().text('输入不合法').parent().removeClass().addClass('invalid');
-        $(this).data('status',status);
+    $(this).data('status',status);
 
-    }
-    $(document).ready(
-            function(){
-                $('input').attr({'autocomplete':'off'});
-                $('#base li').append('<div class="vali"></div>');
-                $('#email').add_validate('email',callback).required(true);
-                $('#name').add_validate('name',callback).required(true);
-                $('#mb').add_validate('mobile',callback).required(true).number_only();
-                $('#twitter').add_validate('twitter',callback);
-                $('#sn').add_validate('student_number',callback).required(true).number_only();
-            }
-            )
-</script>
-{% endblock %}
+}
+$(document).ready(
+        function(){
+        $('input').attr({'autocomplete':'off'});
+        $('#base li').append('<div class="vali"></div>');
+        $('#email').add_validate('email',callback).required(true);
+        $('#name').add_validate('name',callback).required(true);
+        $('#mb').add_validate('mobile',callback).required(true).number_only();
+        $('#twitter').add_validate('twitter',callback);
+        $('#sn').add_validate('student_number',callback).required(true).number_only();
+        }
+        )
+    </script>
+    {% endblock %}
 
