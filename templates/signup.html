@@ -6,14 +6,14 @@
             <h2>Welcome</h2>
             <p>加入开源社区，共享开源乐趣</p>
             <dl>
-                <dt>西电开源社区欢迎你</dt>
+                <dt><span id="xdlinux">西电开源社区</span>欢迎你</dt>
                 <dd>
                 欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
                 </dd>
 				{% if error %}
 				  <dd id='error'>您输入的学号<span>{{ student_num }}</span>已经注册,请重新开始</dd>
 				{% else %}
-				  <dd>还等什么？立即点击“下一步”报名吧！ </dd>
+				  <dd>还等什么？立即点击“NEXT”报名吧！ </dd>
 				{% endif %}
 
             </dl>
@@ -22,7 +22,7 @@
             <h2>
                 Base Information 
             </h2>
-            <p>登记你的基本信息</p>
+            <p>登记你的基本信息<span>(请放心,我们会妥善保存您的个人信息)</span></p>
             <ul>
                 <dt>
                 Name 姓名:
@@ -165,6 +165,9 @@
 	#error span{
 		color:green;
 	}
+	#xdlinux {
+		color:green;
+	}
     ul{
         list-style:none;
         margin:0 60px 0 0;
@@ -277,8 +280,11 @@
     'ftp','iptables','vncserver','WebP','ogg','Java','ADK','Eclipse','Google','Dalvik','Linux','bash','Gnome','Vim','Emacs','grub','Console','KDE','HTML5','Chrome','Webkit','JavaScript','css','JQuery','Django','Python','Ruby','Rails','Firefox','HTTP','Git','zsh'];
     kws.sort(function(a,b){return Math.random()>0.5?1:-1});
     function get_school_name(n){
-        var school_name=['通信工程','电子工程','计算机','机电','技物','人文','理','经济管理','','','','','软件','微电子','生物科学'];
-        return school_name[parseInt(n)-1]+'学院';
+        var school_name=['卓越工程师','通信工程','电子工程','计算机','机电工程','技术物理','人文','理','经济管理','','','','','软件','微电子','生命科学'];
+		if(n[0]=='0'){
+			n=n[1];
+		}
+        return school_name[parseInt(n)]+'学院';
     }
 function callback(status,type,match){
     var v=$(this).next('.vali');
