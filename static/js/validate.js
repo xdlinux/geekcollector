@@ -1,6 +1,10 @@
 $.fn.extend({
     'validate':function(re){
-        return $(this).val().match((re?re:$(this).data('re')));
+        if($(this).val()==""){
+            if($(this).required()) return false;
+            else return true;
+        }
+        return $(this).val().match($(this).data('re'));
     },
     'add_validate':function(type,callback)
    {
@@ -10,7 +14,7 @@ $.fn.extend({
         var regexp={
             'name':/.{2,20}/,
             'email':/([\w\d_\.]+)@(([\w\d]+\.)+\w{1,5})/,
-            'mobile':/(\+\d\d|00\d\d)?(\d{11})/,
+            'mobile':/(\d{11})/,
             'twitter':/@[\w\d_]+/,
             'student_number' : /(0\d|10|12|13|14)(08|09|10|11)([1-9]\d)(\d\d)/,
         }
