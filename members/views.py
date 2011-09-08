@@ -26,7 +26,7 @@ def signup(request):
     if request.method == 'GET':
         return render_to_response('signup.html', {'groups':groups})
     elif request.method == 'POST':
-        group_id = int(request.POST['groups'])
+        group_id = int(request.POST['group'])
         group = Group.objects.get(id = group_id)
         try:
             Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'],email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)

@@ -8,7 +8,7 @@
             <dl>
                 <dt>西电开源社区欢迎你</dt>
                 <dd>
-                欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。您只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
+                欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
                 </dd>
                 <dd>
                 还等什么？立即点击“下一步”报名吧！ </dd>
@@ -56,8 +56,9 @@
         <div id="groups">
             <h2>Groups</h2>
             <p>选择你想加入的小组，开源社区将以小组为单位组织学习(必选)</p>
+            <input type="hidden" name="group" id="group"/>
             {% for group in groups %}
-            <div>
+            <div style="background:url({{ group.image }}) no-repeat">
                 <input type="hidden" value="{{ group.id }}">
                 <dl>
                     <dt>{{ group }}</dt>
@@ -70,12 +71,18 @@
         </div>
         <div id="keywords">
             <h2>Keywords</h2>
-            <p>选择你比较了解或者感兴趣关键字(选填)</p>
+            <p>点选你比较了解或者感兴趣关键字(选填)</p>
+            <div id="kws"></div>
+            <input type="hidden" name="keywords" id="ikw"/>
         </div>
         <div id='confirm'>
             <h2>Confirm</h2>
             <p>确认你填写的信息！</p>
-
+            <dl>
+            <dt>确定信息都是正确的么？</dt>
+            <dd>请确定你所填写的信息是真实无误且符合格式要求的，你可以点击“BACK”回到前面的表单检查信息的正确性，也可以点击“RESET”清空前面所填写的全部内容，并重新填写。</dd>
+            <dd>确定信息准确无误了？猛击“NEXT”，你就将成为西电开源社区的一员！</dd>
+            </dl>
         </div>
     </form>
 </div>
@@ -98,11 +105,12 @@
         min-width:360px;
         overflow:hidden;
         background-color:rgba(255,255,255,0.5);
-        position:fixed;
-        left:40px;
-        right:40px;
-        top:40px;
+        position:absolute;
+        top:15%;
+        left:50%;
+        margin-left:-400px;
         height:480px;
+        width:800px;
         z-index:101;
         -webkit-border-radius:20px;
         -moz-border-radius:20px;
@@ -114,20 +122,21 @@
         -o-box-shadow: 0 0 10px #aaa;
 
     }
-    #welcome,#base,#groups,#keywords{
+    #welcome,#base,#groups,#keywords,#confirm{
         height:480px;
         font-size:24px;
         font-weight:bold;
         color:#666;
         overflow:hidden;
     }
-    #welcome dl{padding:0 70px 0 400px;font-size:18px;
-        height:480px;
+    #welcome dl,#confirm dl{padding:0 70px 0 360px;font-size:18px;
+        height:480px;}
+    #welcome dl{
         background:url(/static/img/opensource.png) no-repeat;
     }
-
-    #welcome dd{margin:10px 0;}
-    #welcome dt{font-size:32px;font-weight:bold;margin:20px 0;color:#13acfa}
+    #confirm dl{background:url(/static/img/confirm.png) no-repeat;}
+    #welcome dd,#confirm dd{margin:10px 0;}
+    #welcome dt,#confirm dt{font-size:32px;font-weight:bold;margin:20px 0;color:#13acfa}
     .button{position:absolute;bottom:20px;right:0;cursor:pointer}
     h2{
         font-size:36px;
@@ -225,6 +234,29 @@
         background-image:url(/static/img/valid.png);
         background-repeat:no-repeat;
     }
+    #groups div{float:left;width:320px;height:150px;margin:20px;
+        cursor:pointer;
+        -webkit-border-radius:20px;
+        -moz-border-radius:20px;
+        -ms-border-radius:20px;
+        -o-border-radius:20px;
+        border:2px solid #eee;
+    }
+    #groups div.selected{border:2px solid #13acfa;}
+    #groups dl{
+        padding:5px 5px 5px 100px;
+        text-shadow:0 0 2px #fff;
+    }
+    #groups dd{
+        font-size:0.6em;
+        margin:10px 0 0 0;
+    }
+    #groups dt{color:#13acfa;font-weight:bold;font-size:0.8em;}
+    #kws{width:640px;}
+    #kws a{display:block;float:left;padding:5px;color:#aaa;padding:20px;cursor:pointer}
+    .kw1{font-size:1em;}
+    .kw2{font-size:0.8em;}
+    #kws a.selected{color:#13acfa;}
 
 </style>
 {% endblock %}
@@ -232,6 +264,9 @@
 {% block js %}
 <script type="text/javascript" src="/static/js/validate.js"></script>
 <script type="text/javascript">
+    var kws=[
+    'ftp','iptables','vncserver','WebP','ogg','Java','ADK','Eclipse','Google','Dalvik','Linux','bash','Gnome','Vim','Emacs','grub','Console','KDE','HTML5','Chrome','Webkit','JavaScript','css','JQuery','Django','Python','Ruby'];
+    kws.sort(function(a,b){return Math.random()>0.5?1:-1});
     function get_school_name(n){
         var school_name=['通信工程','电子工程','计算机','机电','技物','人文','理','经济管理','','','','','软件','微电子','生物科学'];
         return school_name[parseInt(n)-1]+'学院';
@@ -264,6 +299,26 @@ function callback(status,type,match){
 }
 $(document).ready(
         function(){
+        var id=['#name','#sn','#mb','#email','#twitter'];
+        $('#form').submit(function(){
+            for(var i=0;i<id.length;i++)
+            {
+            if(!$(id[i]).validate()){
+                alert('存在未正确填写的内容，请返回前面的表单检查！');
+                return false;
+                }
+            }
+            if(!$('#group').validate(/\d/)){
+                alert('存在未正确填写的内容，请返回前面的表单检查！');
+                return false;
+                }
+            var kws=[];
+            $('#kws a').each(function(){
+                kws.push($(this).text());
+                });
+            $('#ikw').val(kws.join(','));
+            return true;
+        })
         $('input').attr({'autocomplete':'off'});
         $('#base li').append('<div class="vali"></div>');
         $('#email').add_validate('email',callback).required(true);
@@ -271,17 +326,21 @@ $(document).ready(
         $('#mb').add_validate('mobile',callback).required(true).number_only();
         $('#twitter').add_validate('twitter',callback);
         $('#sn').add_validate('student_number',callback).required(true).number_only();
+        $('#group').number_only();
         $('.next').click(function(){
             var top=parseInt($('#inner').css('top'));
             if(top>-1920){
             if(top==0) setTimeout(function(){ $('#name').focus()},1000);
             else if(top==-480){
-            var id=['#name','#sn','#mb','#email','#twitter'];
             for(var i=0;i<id.length;i++){
             if(!$(id[i]).validate()){alert('请确保信息输入完整，格式合法！');$(id[i]).focus();return;}
             }
             }
+            else if(top==-960 && $('#group').val()==""){alert('请选择一个小组！');return;}
             $('#inner').css({'top':top-480});
+            }
+            else if(top<-1400){
+                $('#form').submit();
             }
             })
         $('.back').click(function(){
@@ -290,8 +349,23 @@ $(document).ready(
             })
         $('.reset').click(function(){
             $('#form')[0].reset();
+            $('#base li').removeClass();
+            $('#kws a').removeClass();
+            $('#groups div').removeClass();
+            $('#group').val('');
             $('#inner').css({'top':-480});
             })
+        $('#groups div').click(function(){
+                $('#groups div').removeClass();
+                $(this).addClass('selected');
+                $('#group').val($(this).children('input').val());
+                })
+        var k=$('#kws');
+        while(kws.length>0){
+            k.append($('<a></a>').text(kws.pop()).addClass(Math.random()>0.5?'kw1':'kw2')
+                    .click(function(){$(this).toggleClass('selected')})
+                    );
+        }
         }
         )
 </script>
