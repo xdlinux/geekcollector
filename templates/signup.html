@@ -10,8 +10,11 @@
                 <dd>
                 欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
                 </dd>
-                <dd>
-                还等什么？立即点击“下一步”报名吧！ </dd>
+				{% if error %}
+				  <dd id='error'>您输入的学号<span>{{ student_num }}</span>已经注册,请重新开始</dd>
+				{% else %}
+				  <dd>还等什么？立即点击“下一步”报名吧！ </dd>
+				{% endif %}
 
             </dl>
         </div>
@@ -156,6 +159,12 @@
     -moz-transition:top 1s ease-in-out;
     -o-transition:top 1s ease-in-out;
     }
+	#error {
+		color:red;
+	}
+	#error span{
+		color:green;
+	}
     ul{
         list-style:none;
         margin:0 60px 0 0;

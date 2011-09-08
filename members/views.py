@@ -31,7 +31,7 @@ def signup(request):
         try:
             Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'],email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)
         except  IntegrityError: # if the student_num is already in database, return a extra error
-            return render_to_response('signup.html', {'groups':groups, 'error':'你输入的学号已经注册'})
+            return render_to_response('signup.html', {'groups':groups, 'error':1, 'student_num':request.POST['student_num']})
         else:
             num = Member.objects.count()
             return render_to_response('signup_callback.html', locals()) #用locals()可以直接将当前环境中所有的变量传入
