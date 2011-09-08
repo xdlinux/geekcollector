@@ -1,86 +1,96 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="post">
-    <div id="welcome">
-        <h2>Welcome</h2>
-        <p>加入开源社区，共享开源乐趣</p>
-        <dl>
-            <dt>西电开源社区欢迎你</dt>
-            <dd>
-            欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。您只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
-            </dd>
-            <dd>
-            还等什么？立即点击“下一步”报名吧！ </dd>
-
-        </dl>
-    </div>
-    <div id="base">
-        <h2>
-            Base Information 
-        </h2>
-        <p>登记你的基本信息</p>
-        <ul>
-            <dt>
-            Name 姓名:
-            </dt>
-            <li>
-            <input type="text" name="name" id="name" />
-            </li>
-            <dt>
-            Student Number 学号:
-            </dt>
-            <li>
-            <input type="text" name="student_num" id="sn"/>
-            </li>
-            <dt>
-            Mobile 手机:
-            </dt>
-            <li>
-            <input type="text" name="mobile" id="mb">
-            </li>
-            <dt>
-            E-Mail 电子邮箱:
-            </dt>
-            <li>
-            <input name="email" type="email" id="email"/>
-            </li>
-            <dt>
-            Twitter ID:
-            </dt>
-            <li>
-            <input name="twitter_id" type="text" id="twitter"/>
-            </li>
-        </ul>
-    </div>
-    <div id="groups">
-        {% for group in groups %}
-        <div>
-            <input type="hidden" value="{{ group.id }}">
+<div id="inner">
+    <form action="" method="post" id="form">
+        <div id="welcome">
+            <h2>Welcome</h2>
+            <p>加入开源社区，共享开源乐趣</p>
             <dl>
-                <dt>{{ group }}</dt>
+                <dt>西电开源社区欢迎你</dt>
                 <dd>
-                {{ group.describe }}
+                欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。您只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
                 </dd>
+                <dd>
+                还等什么？立即点击“下一步”报名吧！ </dd>
+
             </dl>
         </div>
-        {% endfor %}
-    </div>
-    <div id="keywords">
-
-    </div>
-        <div class="button">
-            <div class="back">
-                <img src="/static/img/back.png" alt="NEXT" />
+        <div id="base">
+            <h2>
+                Base Information 
+            </h2>
+            <p>登记你的基本信息</p>
+            <ul>
+                <dt>
+                Name 姓名:
+                </dt>
+                <li>
+                <input type="text" name="name" id="name" />
+                </li>
+                <dt>
+                Student Number 学号:
+                </dt>
+                <li>
+                <input type="text" name="student_num" id="sn"/>
+                </li>
+                <dt>
+                Mobile 手机:
+                </dt>
+                <li>
+                <input type="text" name="mobile" id="mb">
+                </li>
+                <dt>
+                E-Mail 电子邮箱:
+                </dt>
+                <li>
+                <input name="email" type="email" id="email"/>
+                </li>
+                <dt>
+                Twitter ID:
+                </dt>
+                <li>
+                <input name="twitter_id" type="text" id="twitter"/>
+                </li>
+            </ul>
+        </div>
+        <div id="groups">
+            <h2>Groups</h2>
+            <p>选择你想加入的小组，开源社区将以小组为单位组织学习(必选)</p>
+            {% for group in groups %}
+            <div>
+                <input type="hidden" value="{{ group.id }}">
+                <dl>
+                    <dt>{{ group }}</dt>
+                    <dd>
+                    {{ group.describe }}
+                    </dd>
+                </dl>
             </div>
-            <div class="reset">
-                <img src="/static/img/reset.png" alt="NEXT" />
-            </div>
-            <div class="next">
-                <img src="/static/img/next.png" alt="NEXT" />
-            </div>
+            {% endfor %}
+        </div>
+        <div id="keywords">
+            <h2>Keywords</h2>
+            <p>选择你比较了解或者感兴趣关键字(选填)</p>
+        </div>
+        <div id='confirm'>
+            <h2>Confirm</h2>
+            <p>确认你填写的信息！</p>
 
         </div>
-</form>
+    </form>
+</div>
+<div class="button">
+    <div class="back">
+        <img src="/static/img/back.png" alt="NEXT" />
+    </div>
+    <div class="reset">
+        <img src="/static/img/reset.png" alt="NEXT" />
+    </div>
+    <div class="next">
+        <img src="/static/img/next.png" alt="NEXT" />
+    </div>
+
+</div>
 {% endblock %}
 {% block style %}
 <style type="text/css">
@@ -109,6 +119,7 @@
         font-size:24px;
         font-weight:bold;
         color:#666;
+        overflow:hidden;
     }
     #welcome dl{padding:0 70px 0 400px;font-size:18px;
         height:480px;
@@ -117,7 +128,7 @@
 
     #welcome dd{margin:10px 0;}
     #welcome dt{font-size:32px;font-weight:bold;margin:20px 0;color:#13acfa}
-    .button{position:absolute;bottom:20px;right:0;}
+    .button{position:absolute;bottom:20px;right:0;cursor:pointer}
     h2{
         font-size:36px;
         color:white;
@@ -131,9 +142,14 @@
         background-color:#13acfa;
         color:white;
     }
+    #inner{position:absolute;left:0;top:0;
+    -webkit-transition:top 1s ease-in-out;
+    -moz-transition:top 1s ease-in-out;
+    -o-transition:top 1s ease-in-out;
+    }
     ul{
         list-style:none;
-        margin:0;
+        margin:0 60px 0 0;
         padding:20px;
     }
     li{
@@ -230,12 +246,6 @@ function callback(status,type,match){
 
                 setTimeout(function(){v.width(v.text().length*18)},200);
             }
-            else if(type=='name') 
-            {
-                var w=$(this).val().replace(/[a-zA-Z']/g,'');
-                v.text('欢迎你，'+w+'!');
-                setTimeout(function(){v.width(w.length*30+57)},200);
-            }
     }
     if($(this).data('status')==status)return;
     v.attr({'style':''})
@@ -261,8 +271,29 @@ $(document).ready(
         $('#mb').add_validate('mobile',callback).required(true).number_only();
         $('#twitter').add_validate('twitter',callback);
         $('#sn').add_validate('student_number',callback).required(true).number_only();
+        $('.next').click(function(){
+            var top=parseInt($('#inner').css('top'));
+            if(top>-1920){
+            if(top==0) setTimeout(function(){ $('#name').focus()},1000);
+            else if(top==-480){
+            var id=['#name','#sn','#mb','#email','#twitter'];
+            for(var i=0;i<id.length;i++){
+            if(!$(id[i]).validate()){alert('请确保信息输入完整，格式合法！');$(id[i]).focus();return;}
+            }
+            }
+            $('#inner').css({'top':top-480});
+            }
+            })
+        $('.back').click(function(){
+            var top=parseInt($('#inner').css('top'));
+            if(top<0) $('#inner').css({'top':top+480});
+            })
+        $('.reset').click(function(){
+            $('#form')[0].reset();
+            $('#inner').css({'top':-480});
+            })
         }
         )
-    </script>
-    {% endblock %}
+</script>
+{% endblock %}
 
