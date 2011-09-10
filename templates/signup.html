@@ -49,13 +49,18 @@
                 <input name="email" type="email" id="email"/>
                 </li>
                 <dt>
-                Twitter ID:
+                Twitter ID(选填,由@开头):
                 </dt>
                 <li>
                 <input name="twitter_id" type="text" id="twitter"/>
                 </li>
             </ul>
         </div>
+		<div id="self_intro">
+			<h2>自我介绍</h2>
+			<p>描述一下自己</p>
+			<textarea name="self_intro"  cols ="50" rows = "10" placeholder="随便说几句吧!"></textarea>
+		</div>
         <div id="groups">
             <h2>Groups</h2>
             <p>选择你想加入的小组，开源社区将以小组为单位组织学习(必选)</p>
@@ -125,7 +130,7 @@
         -o-box-shadow: 0 0 10px #aaa;
 
     }
-    #welcome,#base,#groups,#keywords,#confirm{
+    #welcome,#base,#groups,#keywords,#self_intro,#confirm{
         height:480px;
         font-size:24px;
         font-weight:bold;
@@ -208,6 +213,13 @@
     {
         outline:none;
     }
+	#self_intro textarea{
+		font-size:20px;
+		border:2px solid #666;
+		margin-left:30px;
+		margin-top:60px;
+		padding:2px;
+	}
     li .vali{
         color:white;
         width:0px;
@@ -333,6 +345,11 @@ $(document).ready(
                 kws.push($(this).text());
                 });
             $('#ikw').val(kws.join(','));
+			var groups_id=[];
+			$('#groups div.selected').each(function(){
+                groups_id.push($(this).find("input").val());
+                });
+            $('#group').val(groups_id.join(','));
             return true;
         })
         $('input').attr({'autocomplete':'off'});
@@ -352,10 +369,16 @@ $(document).ready(
             if(!$(id[i]).validate()){alert('请确保信息输入完整，格式合法！');$(id[i]).focus();return;}
             }
             }
-            else if(top==-960 && $('#group').val()==""){alert('请选择一个小组！');return;}
+			else if(top==-960){
+				if($('#self').val()==""){
+					alert("come on,你总该说些什么吧");
+					return;
+				}
+			}
+            else if(top==-1440 && $('#groups div.selected').length===0){alert('请选择至少一个小组！');return;}
             $('#inner').css({'top':top-480});
             }
-            else if(top<-1400){
+            else if(top<-1900){
                 $('#form').submit();
             }
             })
@@ -372,9 +395,7 @@ $(document).ready(
             $('#inner').css({'top':-480});
             })
         $('#groups div').click(function(){
-                $('#groups div').removeClass();
-                $(this).addClass('selected');
-                $('#group').val($(this).children('input').val());
+                $(this).toggleClass('selected');
                 })
         var k=$('#kws');
         while(kws.length>0){
