@@ -42,5 +42,6 @@ def signup(request):
         except  IntegrityError: # if the student_num is already in database, return a extra error
             return render_to_response('signup.html', {'groups':groups, 'error':1, 'student_num':request.POST['student_num']})
         else:
-            return redirect('success')
-
+            #return redirect(request.META['SCRIPT_NAME']+'/success.html')
+            #这里纠结一下，用哪种?
+            return success(request)
