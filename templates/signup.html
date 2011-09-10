@@ -329,7 +329,7 @@ $(document).ready(
                 return false;
                 }
             var kws=[];
-            $('#kws a').each(function(){
+            $('#kws a.selected').each(function(){
                 kws.push($(this).text());
                 });
             $('#ikw').val(kws.join(','));

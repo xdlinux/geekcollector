@@ -29,7 +29,7 @@ def signup(request):
         group_id = int(request.POST['group'])
         group = Group.objects.get(id = group_id)
         try:
-            Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'],email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)
+            Member.objects.create(name = request.POST['name'], student_num = request.POST['student_num'], mobile = request.POST['mobile'], twitter_id = request.POST['twitter_id'], email = request.POST['email'], groups= group, keywords = request.POST['keywords'],)
         except  IntegrityError: # if the student_num is already in database, return a extra error
             return render_to_response('signup.html', {'groups':groups, 'error':1, 'student_num':request.POST['student_num']})
         else:
