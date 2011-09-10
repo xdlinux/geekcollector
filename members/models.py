@@ -20,7 +20,8 @@ class Member(models.Model):
     email = models.EmailField(max_length=75)
     twitter_id = models.CharField(max_length=30, blank=True)
     #小组选择信息，每人可以选择多个小组，设定related_name为groups就可以通过Group.members直接访问某个小组所有报名的人了
-    groups = models.ForeignKey(Group, related_name='members')
+    groups = models.ManyToManyField(Group, related_name='members')
+    self_intro = models.TextField(max_length=300)
 
     #个人感兴趣或者了解的科技相关的关键字,每个人都可以选很多个，所以直接以字符串储存，后期在做处理,
     keywords = models.TextField(blank=True)
