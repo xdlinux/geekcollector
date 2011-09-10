@@ -49,7 +49,7 @@
                 <input name="email" type="email" id="email"/>
                 </li>
                 <dt>
-                Twitter ID(选填,由@开头):
+                Twitter ID(选填,以@开头):
                 </dt>
                 <li>
                 <input name="twitter_id" type="text" id="twitter"/>
@@ -66,7 +66,7 @@
             <p>选择你想加入的小组，开源社区将以小组为单位组织学习(必选)</p>
             <input type="hidden" name="group" id="group"/>
             {% for group in groups %}
-            <div style="background:url({{ group.image }}) no-repeat">
+            <div style="background:url({{ group.image }}) no-repeat;line-height:0.8em;">
                 <input type="hidden" value="{{ group.id }}">
                 <dl>
                     <dt>{{ group }}</dt>
@@ -134,7 +134,7 @@
         height:480px;
         font-size:24px;
         font-weight:bold;
-        color:#666;
+		color:#666;
         overflow:hidden;
     }
     #welcome dl,#confirm dl{padding:0 70px 0 360px;font-size:18px;
@@ -152,6 +152,7 @@
         background-color:#13acfa;
         margin:20px 0 0 0;
         padding:0 10px;
+		line-height:1.2em;
     }
     #wrapper p{
         font-size:18px;
@@ -270,7 +271,7 @@
     }
     #groups div.selected{border:2px solid #13acfa;}
     #groups dl{
-        padding:5px 5px 5px 100px;
+        padding:0px 5px 5px 100px;
         text-shadow:0 0 2px #fff;
     }
     #groups dd{
@@ -279,7 +280,7 @@
     }
     #groups dt{color:#13acfa;font-weight:bold;font-size:0.8em;}
     #kws{width:640px;}
-    #kws a{display:block;float:left;padding:5px;color:#aaa;padding:20px;cursor:pointer}
+    #kws a{display:block;float:left;padding:5px;color:#aaa;padding:20px;cursor:pointer;line-height:0.4em;}
     .kw1{font-size:1em;}
     .kw2{font-size:0.8em;}
     #kws a.selected{color:#13acfa;}
@@ -363,7 +364,7 @@ $(document).ready(
         $('#group').number_only();
         $('.next').click(function(){
             var top=parseInt($('#inner').css('top'));
-            if(top>-1920){
+            if(top>-2400){
             if(top==0) setTimeout(function(){ $('#name').focus()},1000);
             else if(top==-480){
             for(var i=0;i<id.length;i++){
