@@ -1,6 +1,6 @@
 # Django settings for xdl project.
 import os
-
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -13,13 +13,15 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'data.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(ROOT_DIR,'data.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+#DATABASE_NAME = os.path.join(ROOT_DIR,'data.db')
+#DATABASES['default']['NAME'] = DATABASE_NAME
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -108,7 +110,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'templates/'
+    os.path.join(ROOT_DIR,'templates/'),
 )
 
 INSTALLED_APPS = (
