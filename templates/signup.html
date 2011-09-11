@@ -389,6 +389,8 @@ $(document).ready(
             if(top<0) $('#inner').css({'top':top+480});
             })
         $('.reset').click(function(){
+			if (!confirm("你真心要重置已填的信息吗?")) 
+				return false;
             $('#form')[0].reset();
             $('#base li').removeClass();
             $('#kws a').removeClass();
