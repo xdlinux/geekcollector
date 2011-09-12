@@ -22,7 +22,7 @@
             <h2>
                 Base Information 
             </h2>
-            <p>登记你的基本信息<span>(请放心,我们会妥善保存您的个人信息)</span></p>
+            <p>登记你的基本信息<span>(个人信息将会被妥善保管)</span></p>
             <ul>
                 <dt>
                 Name 姓名:
@@ -34,32 +34,32 @@
                 Student Number 学号:
                 </dt>
                 <li>
-                <input type="text" name="student_num" id="sn"/>
+                <input type="text" name="student_num" id="sn" placeholder="8位数字"/>
                 </li>
                 <dt>
                 Mobile 手机:
                 </dt>
                 <li>
-                <input type="text" name="mobile" id="mb">
+                <input type="text" name="mobile" id="mb" placeholder="11位数字">
                 </li>
                 <dt>
                 E-Mail 电子邮箱:
                 </dt>
                 <li>
-                <input name="email" type="email" id="email"/>
+                <input name="email" type="email" id="email" placeholder="name@example.com(建议使用GMail)"/>
                 </li>
                 <dt>
-                Twitter ID(选填,以@开头):
+                Twitter ID:
                 </dt>
                 <li>
-                <input name="twitter_id" type="text" id="twitter"/>
+                <input name="twitter_id" type="text" id="twitter" placeholder="@your_id" />
                 </li>
             </ul>
         </div>
 		<div id="self_intro">
-			<h2>自我介绍</h2>
-			<p>描述一下自己</p>
-			<textarea name="self_intro"  cols ="50" rows = "10" placeholder="随便说几句吧!"></textarea>
+			<h2>Self Introduction</h2>
+			<p>一点点个人简介</p>
+			<textarea name="self_intro"  cols ="50" rows = "10" placeholder="随便说几句吧!" tabindex="-1"></textarea>
 		</div>
         <div id="groups">
             <h2>Groups</h2>
@@ -168,11 +168,8 @@
 	#error {
 		color:red;
 	}
-	#error span{
-		color:green;
-	}
-	#xdlinux {
-		color:green;
+    #error span,#xdlinux{
+        color:#3e3;
 	}
     ul{
         list-style:none;
@@ -209,6 +206,7 @@
         border:none;
         font-size:24px;
         width:90%;
+        background:transparent;
     }
     input:focus
     {
@@ -216,11 +214,11 @@
     }
 	#self_intro textarea{
 		font-size:20px;
-		border:2px solid #666;
-		margin-left:30px;
-		margin-top:60px;
-		padding:2px;
-		height:280px;
+		border:2px solid #ccc;
+        margin:20px ;
+        height:320px;
+        width:600px;
+        background:rgba(255,255,255,0.5)
 	}
     li .vali{
         color:white;
