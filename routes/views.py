@@ -13,4 +13,4 @@ def index(request,os=""):
 
     template为index.html
     """
-    return render_to_response('index.html', locals())
+    return render_to_response('count/count.html', locals())
