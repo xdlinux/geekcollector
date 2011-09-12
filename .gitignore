@@ -1,5 +1,6 @@
 *.pyc
 .pyc
 xdl
+data.db
 *.orig
 .DS_Store

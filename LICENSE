@@ -1,21 +1,5 @@
-西电开源招新登记系统
-=============
-1. 供新生填写信息登记
-2. 查看已存有信息
-2. 导出excel
+Webpage for 2011's team recruiting.
 
-
-成员信息
-=============
-* 姓名
-* 学号
-* 手机
-* 邮件地址
-* 小组(WDT, android, Video, Newbie)
-* 关键字
-
-License
-============
 Copyright (C) <2011>  <xdlinux web development team>
 
 This program is free software: you can redistribute it and/or modify

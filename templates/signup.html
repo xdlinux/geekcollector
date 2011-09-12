@@ -6,12 +6,15 @@
             <h2>Welcome</h2>
             <p>加入开源社区，共享开源乐趣</p>
             <dl>
-                <dt>西电开源社区欢迎你</dt>
+                <dt><span id="xdlinux">西电开源社区</span>欢迎你</dt>
                 <dd>
                 欢迎参与西电开源社区2011招新活动，本次招新面向全校学生，欢迎不同院系不同专业的同学们踊跃参加。只需轻点鼠标，登记个人信息，即可加入我们，与我们一起分享开源带来的无尽乐趣。
                 </dd>
-                <dd>
-                还等什么？立即点击“下一步”报名吧！ </dd>
+				{% if error %}
+				  <dd id='error'>您输入的学号<span>{{ student_num }}</span>已经注册,请重新开始</dd>
+				{% else %}
+				  <dd>还等什么？立即点击“NEXT”报名吧！ </dd>
+				{% endif %}
 
             </dl>
         </div>
@@ -19,7 +22,7 @@
             <h2>
                 Base Information 
             </h2>
-            <p>登记你的基本信息</p>
+            <p>登记你的基本信息<span>(请放心,我们会妥善保存您的个人信息)</span></p>
             <ul>
                 <dt>
                 Name 姓名:
@@ -46,19 +49,24 @@
                 <input name="email" type="email" id="email"/>
                 </li>
                 <dt>
-                Twitter ID:
+                Twitter ID(选填,以@开头):
                 </dt>
                 <li>
                 <input name="twitter_id" type="text" id="twitter"/>
                 </li>
             </ul>
         </div>
+		<div id="self_intro">
+			<h2>自我介绍</h2>
+			<p>描述一下自己</p>
+			<textarea name="self_intro"  cols ="50" rows = "10" placeholder="随便说几句吧!"></textarea>
+		</div>
         <div id="groups">
             <h2>Groups</h2>
             <p>选择你想加入的小组，开源社区将以小组为单位组织学习(必选)</p>
             <input type="hidden" name="group" id="group"/>
             {% for group in groups %}
-            <div style="background:url({{ group.image }}) no-repeat">
+            <div style="background:url({{ group.image }}) no-repeat;line-height:0.8em;">
                 <input type="hidden" value="{{ group.id }}">
                 <dl>
                     <dt>{{ group }}</dt>
@@ -122,11 +130,11 @@
         -o-box-shadow: 0 0 10px #aaa;
 
     }
-    #welcome,#base,#groups,#keywords,#confirm{
+    #welcome,#base,#groups,#keywords,#self_intro,#confirm{
         height:480px;
         font-size:24px;
         font-weight:bold;
-        color:#666;
+		color:#666;
         overflow:hidden;
     }
     #welcome dl,#confirm dl{padding:0 70px 0 360px;font-size:18px;
@@ -144,6 +152,7 @@
         background-color:#13acfa;
         margin:20px 0 0 0;
         padding:0 10px;
+		line-height:1.2em;
     }
     #wrapper p{
         font-size:18px;
@@ -156,6 +165,15 @@
     -moz-transition:top 1s ease-in-out;
     -o-transition:top 1s ease-in-out;
     }
+	#error {
+		color:red;
+	}
+	#error span{
+		color:green;
+	}
+	#xdlinux {
+		color:green;
+	}
     ul{
         list-style:none;
         margin:0 60px 0 0;
@@ -196,6 +214,14 @@
     {
         outline:none;
     }
+	#self_intro textarea{
+		font-size:20px;
+		border:2px solid #666;
+		margin-left:30px;
+		margin-top:60px;
+		padding:2px;
+		height:280px;
+	}
     li .vali{
         color:white;
         width:0px;
@@ -234,7 +260,8 @@
         background-image:url(/static/img/valid.png);
         background-repeat:no-repeat;
     }
-    #groups div{float:left;width:320px;height:150px;margin:20px;
+	#groups div{float:left;width:320px;height:110px;
+		margin:10px 20px 10px 20px;
         cursor:pointer;
         -webkit-border-radius:20px;
         -moz-border-radius:20px;
@@ -244,7 +271,7 @@
     }
     #groups div.selected{border:2px solid #13acfa;}
     #groups dl{
-        padding:5px 5px 5px 100px;
+        padding:0px 5px 5px 100px;
         text-shadow:0 0 2px #fff;
     }
     #groups dd{
@@ -253,7 +280,7 @@
     }
     #groups dt{color:#13acfa;font-weight:bold;font-size:0.8em;}
     #kws{width:640px;}
-    #kws a{display:block;float:left;padding:5px;color:#aaa;padding:20px;cursor:pointer}
+    #kws a{display:block;float:left;padding:5px;color:#aaa;padding:20px;cursor:pointer;line-height:0.4em;}
     .kw1{font-size:1em;}
     .kw2{font-size:0.8em;}
     #kws a.selected{color:#13acfa;}
@@ -265,11 +292,14 @@
 <script type="text/javascript" src="/static/js/validate.js"></script>
 <script type="text/javascript">
     var kws=[
-    'ftp','iptables','vncserver','WebP','ogg','Java','ADK','Eclipse','Google','Dalvik','Linux','bash','Gnome','Vim','Emacs','grub','Console','KDE','HTML5','Chrome','Webkit','JavaScript','css','JQuery','Django','Python','Ruby'];
+    'ftp','iptables','vncserver','WebP','ogg','Java','ADK','Eclipse','Google','Dalvik','Linux','bash','Gnome','Vim','Emacs','grub','Console','KDE','HTML5','Chrome','Webkit','JavaScript','css','JQuery','Django','Python','Ruby','Rails','Firefox','HTTP','Git','zsh'];
     kws.sort(function(a,b){return Math.random()>0.5?1:-1});
     function get_school_name(n){
-        var school_name=['通信工程','电子工程','计算机','机电','技物','人文','理','经济管理','','','','','软件','微电子','生物科学'];
-        return school_name[parseInt(n)-1]+'学院';
+        var school_name=['卓越工程师','通信工程','电子工程','计算机','机电工程','技术物理','人文','理','经济管理','','','','','软件','微电子','生命科学'];
+		if(n[0]=='0'){
+			n=n[1];
+		}
+        return school_name[parseInt(n)]+'学院';
     }
 function callback(status,type,match){
     var v=$(this).next('.vali');
@@ -313,10 +343,15 @@ $(document).ready(
                 return false;
                 }
             var kws=[];
-            $('#kws a').each(function(){
+            $('#kws a.selected').each(function(){
                 kws.push($(this).text());
                 });
             $('#ikw').val(kws.join(','));
+			var groups_id=[];
+			$('#groups div.selected').each(function(){
+                groups_id.push($(this).find("input").val());
+                });
+            $('#group').val(groups_id.join(','));
             return true;
         })
         $('input').attr({'autocomplete':'off'});
@@ -329,17 +364,23 @@ $(document).ready(
         $('#group').number_only();
         $('.next').click(function(){
             var top=parseInt($('#inner').css('top'));
-            if(top>-1920){
+            if(top>-2400){
             if(top==0) setTimeout(function(){ $('#name').focus()},1000);
             else if(top==-480){
             for(var i=0;i<id.length;i++){
             if(!$(id[i]).validate()){alert('请确保信息输入完整，格式合法！');$(id[i]).focus();return;}
             }
             }
-            else if(top==-960 && $('#group').val()==""){alert('请选择一个小组！');return;}
+			else if(top==-960){
+				if($('#self').val()==""){
+					alert("come on,你总该说些什么吧");
+					return;
+				}
+			}
+            else if(top==-1440 && $('#groups div.selected').length===0){alert('请选择至少一个小组！');return;}
             $('#inner').css({'top':top-480});
             }
-            else if(top<-1400){
+            else if(top<-1900){
                 $('#form').submit();
             }
             })
@@ -348,6 +389,8 @@ $(document).ready(
             if(top<0) $('#inner').css({'top':top+480});
             })
         $('.reset').click(function(){
+			if (!confirm("你真心要重置已填的信息吗?")) 
+				return false;
             $('#form')[0].reset();
             $('#base li').removeClass();
             $('#kws a').removeClass();
@@ -356,9 +399,7 @@ $(document).ready(
             $('#inner').css({'top':-480});
             })
         $('#groups div').click(function(){
-                $('#groups div').removeClass();
-                $(this).addClass('selected');
-                $('#group').val($(this).children('input').val());
+                $(this).toggleClass('selected');
                 })
         var k=$('#kws');
         while(kws.length>0){

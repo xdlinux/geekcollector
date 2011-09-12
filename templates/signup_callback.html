@@ -1,1 +1,49 @@
-你是第 {{ num }} 个注册用户
+{% extends "base.html" %}
+{% block content %}
+<div id="main">
+	<p style="color:#ee7832;">Congratulations!</p> <p>你是第<strong></strong>位新注册成员!</p>
+</div>
+<div id="back">
+	<a href="signup">返回继续注册</a>
+</div>
+{% endblock %}
+{% block style %}
+<style type="text/css">
+	#main {
+		margin-top:100px;
+		margin-left:50px;
+		float:left;
+		font-size:2em;
+		font-weight:bolder;
+		color:#666;
+		z-index:101;
+		position:fixed;
+	}
+	#main p{
+		line-height:3em;
+	}
+	strong{
+		font-size:3em;
+		line-height:80px;
+		color:#13ACFA;
+	}
+	
+	strong:hover{color:red;}	
+	#back {
+		background:transparent;
+		position:fixed;
+		font-size:1.5em;
+		left:40px;
+		bottom:60px;
+		z-index:103;
+		text-align:left;
+	}	
+</style>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+$.getJSON('count', function(data) {
+ 	$('strong').html(data.num)
+});
+</script>
+{% endblock %}
