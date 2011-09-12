@@ -12,7 +12,7 @@ $.fn.extend({
     if(typeof(type)=='undefined') type='email';
     else{
         var regexp={
-            'name':/.{2,20}/,
+            'name':/\D{2,20}/,
             'email':/([\w\d_\.]+)@(([\w\d]+\.)+\w{1,5})/,
             'mobile':/(\d{11})/,
             'twitter':/@[\w\d_]+/,
