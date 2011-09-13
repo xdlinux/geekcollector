@@ -360,9 +360,12 @@ $(document).ready(
         $('#twitter').add_validate('twitter',callback);
         $('#sn').add_validate('student_number',callback).required(true).number_only();
         $('#group').number_only();
+        var lock=false;
         $('.next').click(function(){
             var top=parseInt($('#inner').css('top'));
-            if(top>-2400){
+            if(top>-2400 && !lock){
+            lock=true;
+            setTimeout(function(){lock=false},1100);
             if(top==0) setTimeout(function(){ $('#name').focus()},1000);
             else if(top==-480){
             for(var i=0;i<id.length;i++){
@@ -381,10 +384,16 @@ $(document).ready(
             else if(top<-1900){
                 $('#form').submit();
             }
+
             })
+        var lockback=false
         $('.back').click(function(){
+            setTimeout(function(){lockback=false},1100);
             var top=parseInt($('#inner').css('top'));
-            if(top<0) $('#inner').css({'top':top+480});
+            if(top<0 && !lockback) {
+            lockback=true;
+            $('#inner').css({'top':top+480});
+            }
             })
         $('.reset').click(function(){
 			if (!confirm("你真心要重置已填的信息吗?")) 
