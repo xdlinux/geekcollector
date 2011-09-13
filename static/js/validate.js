@@ -37,14 +37,13 @@ $.fn.extend({
         else  callback.call($(this),'invalid',type,$(this).val())
     }
     return $(this)
-        .focus(vali).blur(
+        .focus(vali)
+        .bind('keyup',vali)
+        .bind('blur',
                 function(){
                     if((!$(this).data('required')) && $(this).val()=="") callback.call($(this),'normal')
                     else vali.call($(this));
-                }
-                )
-        .bind('keyup',vali)
-        .bind('change',vali);
+                });
    },
     'required':function(bool){
         if(typeof(bool)!='undefined')

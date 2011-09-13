@@ -311,7 +311,9 @@ function callback(status,type,match){
             }
     }
     if($(this).data('status')==status)return;
+    $(this).data('status',status);
     v.attr({'style':''})
+        setTimeout(function(){
         if(status=='valid')
             v.parent().removeClass().addClass('valid');
         else if(status=='normal')
@@ -321,8 +323,8 @@ function callback(status,type,match){
         else if(status=='empty')
             v.empty().text('此项选填').parent().removeClass().addClass('focus');
         else if(status=='invalid')
-            v.empty().text('输入不合法').parent().removeClass().addClass('invalid');
-    $(this).data('status',status);
+        v.empty().text('输入不合法').parent().removeClass().addClass('invalid');
+        },500)
 
 }
 $(document).ready(
@@ -374,7 +376,7 @@ $(document).ready(
             }
 			else if(top==-960){
 				if($('#self').val()==""){
-					alert("come on,你总该说些什么吧");
+					alert("Come on,你总该说些什么吧");
 					return;
 				}
 			}
@@ -403,6 +405,7 @@ $(document).ready(
             $('#kws a').removeClass();
             $('#groups div').removeClass();
             $('#group').val('');
+            $('input').data('status','');
             $('#inner').css({'top':-480});
             })
         $('#groups div').click(function(){
