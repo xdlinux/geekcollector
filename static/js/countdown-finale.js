@@ -489,7 +489,7 @@ var countdownFinale = (function() {
       document.body.style.cursor = 'pointer';
       document.body.addEventListener('click', function(e) {
         if ($(e.target).attr('id') != 'countdown-watch-again') {
-          window.location = 'http://xdlinux.info/';
+          window.location = '/signup';
         }
       }, false);
       positionAdjustment = .005;

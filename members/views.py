@@ -3,19 +3,16 @@ from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from xdlinux.members.models import Member, Group #引入报名成员的CRM，members，具体实现已经完成，请看源文件，注释都写了
 from django.db import IntegrityError
-from json import dumps
 
 def count(request):
     """返回当前已经报名的总人数，直接返回数字就好了，不需要特殊格式"""
-    num = Member.objects.count()
-    data ={
-    "num":num
-    }
-    return HttpResponse(dumps(data), mimetype='application/json')
+    sumcount = '%d' % Member.objects.count()
+    if request.GET.has_key('json'):
+        return HttpResponse(sumcount, mimetype='application/json')
+    else:
+        return render_to_response('count/count.html',{'sumcount':sumcount})
+
     
-def success(request):
-    """the page then usr register successfully"""
-    return render_to_response('signup_callback.html', locals())
     
 def signup(request):
     """
@@ -44,4 +41,4 @@ def signup(request):
         else:
             #return redirect(request.META['SCRIPT_NAME']+'/success.html')
             #这里纠结一下，用哪种?
-            return success(request)
+            return render_to_response('signup_callback.html', {'id':newmember.id+1})

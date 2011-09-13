@@ -8,13 +8,16 @@
         <div id="canvas-content"> 
             <div id="countdown"> 
                 <script type="text/javascript"> 
-                    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-                    </script> 
+document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+</script> 
                 </div> 
+                <script type="text/javascript">
+                    var sumcount= {{ sumcount }};
+                </script>
                 <script type="text/javascript" src="/static/js/base.js"></script> 
                 <script type="text/javascript" src="/static/js/box2d.js"></script> 
                 <script type="text/javascript" src="/static/js/io.js"></script> 
             </div> 
         </div> 
     </div>
-{% endblock %}
+    {% endblock %}

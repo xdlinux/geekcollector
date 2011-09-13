@@ -638,27 +638,31 @@ if (!window.requestAnimationFrame) {
    *    minutes and seconds until global countdownTo variable.
    * @return {Array.<String>} array of all digits plus separators.
    */
+  var n=0;
   function getDigits() {
-    var now = new Date().getTime();
-    var dateDiff = Math.floor((countdownTo - now) / 1000);
+    //var now = new Date().getTime();
+    //var dateDiff = Math.floor((countdownTo - now) / 1000);
     /**
      * Don't return anything if we're past the countdownTo date.
      */
-    if (dateDiff < 0) {
-      return [];
-    } else {
       //var days = padNum(Math.floor(dateDiff / 86400), 3);
-      var timeRemaining = Math.floor(dateDiff % 86400);
+      //var timeRemaining = Math.floor(dateDiff % 86400);
       //var hours = padNum(Math.floor(timeRemaining / 3600), 2);
       //var minutes = padNum(Math.floor((timeRemaining % 3600) / 60), 2);
-      var seconds = padNum(timeRemaining,3)//padNum(((timeRemaining % 3600) % 60) % 60, 2);
-      var values = [ seconds].join('').split('');
+      //var seconds = padNum(timeRemaining,3)//padNum(((timeRemaining % 3600) % 60) % 60, 2);
+      //var values = [ seconds].join('').split('');
       //values.splice(3, 0, ':');
       //values.splice(6, 0, ':');
       //values.splice(9, 0, ':');
-
-      return values
-    }
+      if(n%300==0){
+          n=0;
+          $.get('/count/?json=true',function(data){
+          sumcount=parseInt(data);
+      })
+      }
+      n++;
+      if(sumcount>0 && sumcount%10==0) return [];
+      return padNum(sumcount,3).split('');
   }
 
   /**
