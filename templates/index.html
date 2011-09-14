@@ -1,1 +1,30 @@
-test
+
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>XDL@2011</title> 
+        <link rel="stylesheet" href="/static/css/style.css" media="all"> 
+        <style type="text/css">
+            #main{
+                margin:200px auto;
+            }
+        </style>
+    </head> 
+    <body id="index"> 
+        <div id="gradient">&nbsp;</div> 
+        <div id="wrapper"> 
+            <div id="label">
+                <p>以<span>{{ os.name }}</span>的方式加入我们!</p>
+                <h1>Join us in <span>{{ os.name }}</span>'s way!</h1>
+            </div>
+            <p>
+                {{ os.describe }}
+            </p>
+        </div>
+        <div id="main">
+            <h2>{{ os }}</h2>
+            <p>{{ os.describe }}</p>
+        </div>
+    </body> 
+</html> 
+

@@ -1,7 +1,8 @@
 #-*- coding: UTF-8 -*-
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from xdlinux.routes.models import OS
+import re
 
 
 def index(request,os=""):
@@ -13,4 +14,22 @@ def index(request,os=""):
 
     template为index.html
     """
-    return render_to_response('count/count.html', locals())
+    if os=="":
+        ua=request.META['HTTP_USER_AGENT']
+        #if re.search(r'Macintosh',ua):
+          #  return redirect('/apple/')
+        if re.search(r'(Chrome|chromium)',ua,re.I):
+            return redirect('/chrome/')
+        if re.search(r'Safari',ua,re.I):
+            return redirect('/webkit/')
+        if re.search(r'Firefox',ua,re.I) and re.search(r'Gecko',ua,re.I):
+            return redirect('/firefox/')
+        if re.search(r'Opera',ua,re.I) and re.search(r'Presto',ua,re.I):
+            return redirect('/opera/')
+        if re.search(r'linux',ua,re.I):
+            return redirect('/linux/')
+        try:
+            OS.objects.get(tag=os)
+        except Exception, e:
+            return redirect('/geek/')
+    return render_to_response('index.html', {'os':os})
