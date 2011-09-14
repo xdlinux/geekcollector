@@ -12,11 +12,11 @@ $.fn.extend({
     if(typeof(type)=='undefined') type='email';
     else{
         var regexp={
-            'name':/\D{2,20}/,
-            'email':/([\w\d_\.]+)@(([\w\d]+\.)+\w{1,5})/,
-            'mobile':/(\d{11})/,
-            'twitter':/@[\w\d_]+/,
-            'student_number' : /(0[0-8]|13|14|15)(08|09|10|11)([1-9]\d)(\d\d)/,
+            'name':/^\D{2,20}$/,
+            'email':/^([\w\d_\.]+)@(([\w\d]+\.)+\w{1,5})$/,
+            'mobile':/^(\d{11})$/,
+            'twitter':/^@[\w\d_]+$/,
+            'student_number' : /^(0[0-8]|13|14|15)(08|09|10|11)([1-9]\d)(\d\d)$/,
         }
         if(!(re=regexp[type]))
         {
