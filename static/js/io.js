@@ -655,13 +655,12 @@ if (!window.requestAnimationFrame) {
       //values.splice(6, 0, ':');
       //values.splice(9, 0, ':');
       if(n%300==0){
-          n=0;
-          $.get('/count/',function(data){
+          $.get('',function(data){
           sumcount=parseInt(data);
       })
       }
       n++;
-      if(sumcount>0 && sumcount%10==0) return [];
+      if(n%6000==0){n=0; return [];}
       return padNum(sumcount,3).split('');
   }
 
