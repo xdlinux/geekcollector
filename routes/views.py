@@ -28,8 +28,11 @@ def index(request,os=""):
             return redirect('/opera/')
         if re.search(r'linux',ua,re.I):
             return redirect('/linux/')
-    try:
-        route=OS.objects.get(tag=os)
-    except Exception, e:
-        return redirect('/falone/')
+    elif os=="random":
+        route=OS.objects.order_by('?').all()[0]
+    else:
+        try:
+            route=OS.objects.get(tag=os)
+        except Exception, e:
+            return redirect('/falone/')
     return render_to_response('index.html', {'os':route})
