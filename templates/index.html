@@ -21,6 +21,29 @@
                 color:#13acfa;
                 margin:10px 0;
             }
+            #tosignup{
+                background:url(/static/img/tosignup.png) no-repeat right center #13acfa;
+                color:#fff;
+                bottom:0;
+                padding:10px;
+                margin-top:200px;
+                width:80%;
+                cursor:pointer;
+                -webkit-transition: width 0.4s ease-out;
+                -moz-transition: width 0.4s ease-out;
+                -o-transition: width 0.4s ease-out;
+                transition: width 0.4s ease-out;
+
+            }
+            #tosignup:hover
+            {
+                width:100%;
+            }
+            #tosignup a{
+                font-size:1.4em;
+                color:#fff;
+                text-decoration:underline;
+            }
         </style>
     </head> 
     <body id="index"> 
@@ -34,6 +57,12 @@
         <div id="main" style="background-image:url(/media/{{ os.image }});">
             <h1>{{ os }}</h1>
             <p>{{ os.describe }}</p>
+            <div id="tosignup" onclick="window.location.href='/signup/';">
+                想了解更多有关开源的知识？
+                <br/>
+                <br/>
+                <a href="/signup/"> 立即报名加入！</a>
+            </div>
         </div>
     </body> 
 </html> 
