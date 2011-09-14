@@ -27,3 +27,4 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
 )
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT )
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT )

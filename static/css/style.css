@@ -63,7 +63,7 @@ div.screen {
     right: 0;
     bottom: 0;
     background: transparent url(../img/gradient.png) no-repeat 50% -100px;
-    z-index: 1;
+    z-index: -1;
     height: 1236px;
 }
 body.degrade #gradient {

@@ -6,7 +6,7 @@ class OS(models.Model):
     tag = models.CharField(max_length=10)
     name = models.CharField(max_length=20)
     describe = models.CharField(max_length=140)
-    image = models.ImageField(upload_to='media/', max_length=100)
+    image = models.ImageField(upload_to='./', max_length=100)
     def __unicode__(self):
         return self.name
 

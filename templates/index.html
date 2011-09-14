@@ -6,7 +6,20 @@
         <link rel="stylesheet" href="/static/css/style.css" media="all"> 
         <style type="text/css">
             #main{
-                margin:200px auto;
+                margin:50px auto;
+                width:300px;
+                height:400px;
+                background:rgba(255,255,255,0.6);
+                background-repeat:no-repeat;
+                padding:5px 5px 5px 200px;
+                -webkit-box-shadow: 0 0 4px #000;
+                -moz-box-shadow: 0 0 4px #000;
+                -o-box-shadow: 0 0 4px #000;
+                box-shadow: 0 0 4px #000;
+            }
+            #main h1{
+                color:#13acfa;
+                margin:10px 0;
             }
         </style>
     </head> 
@@ -14,15 +27,12 @@
         <div id="gradient">&nbsp;</div> 
         <div id="wrapper"> 
             <div id="label">
-                <p>以<span>{{ os.name }}</span>的方式加入我们!</p>
-                <h1>Join us in <span>{{ os.name }}</span>'s way!</h1>
+                <p>以<span>{{ os }}</span>的方式加入我们!</p>
+                <h1>Join us in <span>{{ os }}</span>'s way!</h1>
             </div>
-            <p>
-                {{ os.describe }}
-            </p>
         </div>
-        <div id="main">
-            <h2>{{ os }}</h2>
+        <div id="main" style="background-image:url(/media/{{ os.image }});">
+            <h1>{{ os }}</h1>
             <p>{{ os.describe }}</p>
         </div>
     </body> 

@@ -60,8 +60,11 @@
 			<h2>Self Introduction</h2>
 			<p>一点点个人简介</p>
 			<textarea name="self_intro" id="self" cols ="50" rows = "10" placeholder="随便说几句吧!" tabindex="-1"></textarea>
-            :q
 
+            <div id="check">
+                我非常愿意承担社区组织和活动任务
+            </div>
+            <input type="hidden" name="activity" />
 
 		</div>
         <div id="groups">
@@ -112,6 +115,8 @@
 {% endblock %}
 {% block style %}
 <style type="text/css">
+    #check{background:url(/static/img/unchecked.png) no-repeat #eee;cursor:pointer;padding:5px 1em;}
+    #check.checked{background:url(/static/img/checked.png) no-repeat #13acfa;}
     #wrapper{
         min-width:360px;
         overflow:hidden;
@@ -127,10 +132,12 @@
         -moz-border-radius:20px;
         -ms-border-radius:20px;
         -o-border-radius:20px;
+        border-radius:20px;
         -webkit-box-shadow: 0 0 10px #aaa;
         -moz-box-shadow: 0 0 10px #aaa;
         -ms-box-shadow: 0 0 10px #aaa;
         -o-box-shadow: 0 0 10px #aaa;
+        box-shadow: 0 0 10px #aaa;
 
     }
     #welcome,#base,#groups,#keywords,#self_intro,#confirm{
@@ -167,6 +174,7 @@
     -webkit-transition:top 1s ease-in-out;
     -moz-transition:top 1s ease-in-out;
     -o-transition:top 1s ease-in-out;
+    transition:top 1s ease-in-out;
     }
 	#error {
 		color:red;
@@ -189,6 +197,7 @@
         -webkit-transition:border 0.4s ease-out;
         -moz-transition:border 0.4s ease-out;
         -o-transition:border 0.4s ease-out;
+        transition:border 0.4s ease-out;
     }
     li.focus{
         border:solid 2px #13acfa;
@@ -219,7 +228,7 @@
 		font-size:20px;
 		border:2px solid #ccc;
         margin:20px ;
-        height:320px;
+        height:200px;
         width:600px;
         background:rgba(255,255,255,0.5)
 	}
@@ -236,6 +245,7 @@
         -webkit-transition:width 0.4s ease-out,background-color 0.2s ease-out;
         -moz-transition:width 0.4s ease-out,background-color 0.2s ease-out;
         -o-transition:width 0.4s ease-out,background-color 0.2s ease-out;
+        transition:width 0.4s ease-out,background-color 0.2s ease-out;
     }
     .focus .vali{
         width:80px;
@@ -268,6 +278,7 @@
         -moz-border-radius:20px;
         -ms-border-radius:20px;
         -o-border-radius:20px;
+        border-radius:20px;
         border:2px solid #eee;
     }
     #groups div.selected{border:2px solid #13acfa;}
@@ -365,6 +376,10 @@ $(document).ready(
         $('#twitter').add_validate('twitter',callback);
         $('#sn').add_validate('student_number',callback).required(true).number_only();
         $('#group').number_only();
+        $('#check').click(function(){
+                $(this).toggleClass('checked');
+                })
+       
         var lock=false;
         $('.next').click(function(){
             var top=parseInt($('#inner').css('top'));
