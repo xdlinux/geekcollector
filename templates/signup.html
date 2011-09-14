@@ -64,7 +64,7 @@
             <div id="check">
                 我非常愿意承担社区组织和活动任务
             </div>
-            <input type="hidden" name="activity" />
+            <input type="hidden" name="activity" id="activity" />
 
 		</div>
         <div id="groups">
@@ -115,8 +115,8 @@
 {% endblock %}
 {% block style %}
 <style type="text/css">
-    #check{background:url(/static/img/unchecked.png) no-repeat #eee;cursor:pointer;padding:5px 1em;}
-    #check.checked{background:url(/static/img/checked.png) no-repeat #13acfa;}
+    #check{background:url(/static/img/unchecked.png) no-repeat #ccc;cursor:pointer;padding:5px 1em;}
+    #check.checked{background:url(/static/img/checked.png) no-repeat #13acfa;color:white}
     #wrapper{
         min-width:360px;
         overflow:hidden;
@@ -366,6 +366,8 @@ $(document).ready(
                 groups_id.push($(this).find("input").val());
                 });
             $('#group').val(groups_id.join(','));
+            if($('#check').hasClass('checked')) $('#activity').val('true');
+            else $('#activity').val('false');
             return true;
         })
         $('input').attr({'autocomplete':'off'});
