@@ -656,7 +656,7 @@ if (!window.requestAnimationFrame) {
       //values.splice(9, 0, ':');
       if(n%300==0){
           n=0;
-          $.get('/count/?json=true',function(data){
+          $.get('/count/',function(data){
           sumcount=parseInt(data);
       })
       }

@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 def count(request):
     """返回当前已经报名的总人数，直接返回数字就好了，不需要特殊格式"""
     sumcount = '%d' % Member.objects.count()
-    if request.GET.has_key('json'):
+    if request.is_ajax():
         return HttpResponse(sumcount, mimetype='application/json')
     else:
         return render_to_response('count/count.html',{'sumcount':sumcount})
