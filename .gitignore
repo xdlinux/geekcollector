@@ -4,3 +4,4 @@ xdl
 data.db
 *.orig
 .DS_Store
+templates/count/makedots/
