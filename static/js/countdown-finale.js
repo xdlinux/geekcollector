@@ -498,11 +498,6 @@ var countdownFinale = (function() {
         .to({x: 0, y: 0, z: 700}, 1000).easing(TWEEN.Easing.Circular.EaseOut).start();
       new TWEEN.Tween(group.position)
         .to({z: 200}, 2000).easing(TWEEN.Easing.Circular.EaseOut).start();
-      setTimeout( function() {
-        window.location.hash = '#again';
-        window.location.reload(true);
-        return false;
-      },20000);
     }
   }
 

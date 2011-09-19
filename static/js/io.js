@@ -638,30 +638,26 @@ if (!window.requestAnimationFrame) {
    *    minutes and seconds until global countdownTo variable.
    * @return {Array.<String>} array of all digits plus separators.
    */
-  var n=0;
   function getDigits() {
-    //var now = new Date().getTime();
-    //var dateDiff = Math.floor((countdownTo - now) / 1000);
+    var now = new Date().getTime();
+    var dateDiff = Math.floor((countdownTo - now) / 1000);
     /**
      * Don't return anything if we're past the countdownTo date.
      */
-      //var days = padNum(Math.floor(dateDiff / 86400), 3);
-      //var timeRemaining = Math.floor(dateDiff % 86400);
-      //var hours = padNum(Math.floor(timeRemaining / 3600), 2);
-      //var minutes = padNum(Math.floor((timeRemaining % 3600) / 60), 2);
-      //var seconds = padNum(timeRemaining,3)//padNum(((timeRemaining % 3600) % 60) % 60, 2);
-      //var values = [ seconds].join('').split('');
-      //values.splice(3, 0, ':');
-      //values.splice(6, 0, ':');
-      //values.splice(9, 0, ':');
-      if(n%300==0){
-          $.get('',function(data){
-          sumcount=parseInt(data);
-      })
-      }
-      n++;
-      if(n%6000==0){n=0; return [];}
-      return padNum(sumcount,3).split('');
+    if (dateDiff < 0) {
+      return [];
+    } else {
+      var days = padNum(Math.floor(dateDiff / 86400), 3);
+      var timeRemaining = Math.floor(dateDiff % 86400);
+      var hours = padNum(Math.floor(timeRemaining / 3600), 2);
+      var minutes = padNum(Math.floor((timeRemaining % 3600) / 60), 2);
+      var seconds = padNum(((timeRemaining % 3600) % 60) % 60, 2);
+      var values = [days, hours, minutes, seconds].join('').split('');
+      values.splice(3, 0, ':');
+      values.splice(6, 0, ':');
+      values.splice(9, 0, ':');
+      return values;
+    }
   }
 
   /**
@@ -678,7 +674,7 @@ if (!window.requestAnimationFrame) {
      * Set the virtual cursor to zero. Gets incremented as Digits and Dots
      *     are draw on ctx.
      */
-    var cursorX = 350, cursorY = 0;
+    var cursorX = 0, cursorY = 0;
 
     /**
      * Reset current digit list to an empty array.
@@ -755,7 +751,7 @@ if (!window.requestAnimationFrame) {
          * Run the draw routine on the Digit, rendering itself
          *    on the ctx.
          */
-         if(!dontdraw) currentDigits[i].draw();
+        currentDigits[i].draw();
 
         /**
          * If a Digit exist on oldDigits in this position,
@@ -849,7 +845,7 @@ if (!window.requestAnimationFrame) {
   /**
    * Get the date we're counting down to.
    */
-  var countdownTo = new Date().getTime() + 10000;
+  var countdownTo = new Date('2011-9-20 18:30').getTime();
 
   /**
    * Buckets for the Digits.
@@ -894,14 +890,11 @@ if (!window.requestAnimationFrame) {
    * Default Countdown.
    */
   countdownConfigs.push({
-    gravity: { x: 0, y: 30 },
-    colors: ['c0000b','009a49','13acfa','',
-   // '265897', '265897', '265897', '',
-    '13acfa', '13acfa', '13acfa', '',
-             '009a49', '009a49','',
-  			 'c0000b', 'c0000b','c0000b', '',
-    			'265897', '265897', '',
-             ],
+    gravity: { x: 0, y: 40 },
+    colors: ['265897', '265897', '265897', '',
+             '13acfa', '13acfa', '',
+             'c0000b', 'c0000b', '',
+             '009a49', '009a49'],
     dotType: 'ball',
     surface: {
       density: 1.0,

@@ -128,7 +128,7 @@ background:transparent;
 position:fixed;
 font-size:1.5em;
 right:20px;
-bottom:40px;
+bottom:0px;
 z-index:100;
 color:#666;
 text-align:right;
