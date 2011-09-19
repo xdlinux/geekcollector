@@ -3,9 +3,7 @@ from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from xdlinux.members.models import Member, Group #引入报名成员的CRM，members，具体实现已经完成，请看源文件，注释都写了
 from django.db import IntegrityError
-from django.contrib.auth.decorators import login_required
 
-@login_required
 def count(request):
     """返回当前已经报名的总人数，直接返回数字就好了，不需要特殊格式"""
     sumcount = '%d' % Member.objects.count()
