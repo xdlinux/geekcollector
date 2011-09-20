@@ -32,4 +32,4 @@ def signup(request):
         else:
             #return redirect(request.META['SCRIPT_NAME']+'/success.html')
             #这里纠结一下，用哪种?
-            return render_to_response('signup_callback.html', {'id':newmember.id})
+            return render_to_response('signup_callback.html', {'id':newmember.id, 's_root':request.META['SCRIPT_NAME']})

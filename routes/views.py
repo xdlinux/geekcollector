@@ -14,25 +14,26 @@ def index(request,os=""):
 
     template为index.html
     """
+    s_root = request.META['SCRIPT_NAME']
     if os=="":
         ua=request.META['HTTP_USER_AGENT']
         #if re.search(r'Macintosh',ua):
           #  return redirect('/apple/')
         if re.search(r'(Chrome|chromium)',ua,re.I):
-            return redirect('/chrome/')
+            return redirect( s_root+'/chrome/' )
         if re.search(r'Safari',ua,re.I):
-            return redirect('/webkit/')
+            return redirect( s_root+'/webkit/' )
         if re.search(r'Firefox',ua,re.I) and re.search(r'Gecko',ua,re.I):
-            return redirect('/firefox/')
+            return redirect( s_root+'/firefox/')
         if re.search(r'Opera',ua,re.I) and re.search(r'Presto',ua,re.I):
-            return redirect('/opera/')
+            return redirect( s_root+'/opera/')
         if re.search(r'linux',ua,re.I):
-            return redirect('/linux/')
+            return redirect( s_root+'/linux/')
     elif os=="random":
         route=OS.objects.order_by('?').all()[0]
     else:
         try:
             route=OS.objects.get(tag=os)
         except Exception, e:
-            return redirect('/falone/')
-    return render_to_response('index.html', {'os':route})
+            return redirect( s_root+'/falone/')
+    return render_to_response('index.html', {'os':route,'s_root':s_root})

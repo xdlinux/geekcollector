@@ -57,11 +57,11 @@
         <div id="main" style="background-image:url(/media/{{ os.image }});">
             <h1>{{ os }}</h1>
             <p>{{ os.describe }}</p>
-            <div id="tosignup" onclick="window.location.href='/signup/';">
+            <div id="tosignup" onclick="window.location.href='{{s_root}}/signup/';">
                 想了解更多有关开源的知识？
                 <br/>
                 <br/>
-                <a href="/signup/"> 立即报名加入！</a>
+                <a href="{{ s_root }}/signup/"> 立即报名加入！</a>
             </div>
         </div>
     </body> 
